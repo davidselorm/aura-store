@@ -63,36 +63,29 @@ export default function Footer({ onShowToast, onOpenOrders }) {
         {/* Brand & Mission */}
         <div className="footer-brand">
           <div className="brand-logo" style={{ marginBottom: '16px' }}>
-            <div className="brand-emblem-wrapper" style={{ width: '36px', height: '36px' }}>
-              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" style={{ width: '100%', height: '100%' }}>
-                <defs>
-                  <linearGradient id="footerGlow" x1="0%" y1="0%" x2="100%" y2="100%">
-                    <stop offset="0%" stopColor="#38bdf8" />
-                    <stop offset="100%" stopColor="#818cf8" />
-                  </linearGradient>
-                </defs>
-                <circle cx="20" cy="20" r="18" fill="#0f172a" stroke="url(#footerGlow)" strokeWidth="1.5" />
-                <polygon points="20,7 31,13.5 31,26.5 20,33 9,26.5 9,13.5" stroke="url(#footerGlow)" strokeWidth="1.4" fill="rgba(56, 189, 248, 0.08)" />
-                <polygon points="20,14 26,20 20,26 14,20" stroke="url(#footerGlow)" strokeWidth="1.2" fill="rgba(0, 240, 255, 0.25)" />
-                <circle cx="20" cy="20" r="2" fill="#ffffff" />
-              </svg>
+            <div className="brand-emblem-wrapper" style={{ width: '40px', height: '40px' }}>
+              <img
+                src="/aura-logo.jpg"
+                alt="AURA Atelier"
+                className="brand-emblem-img"
+              />
             </div>
             <div className="brand-text-group">
               <div className="brand-name-row">
-                <span className="brand-name-title" style={{ fontSize: '1.2rem' }}>AURA</span>
-                <span className="brand-edition-badge">STUDIO</span>
+                <span className="brand-name-title" style={{ fontSize: '1.25rem' }}>AURA</span>
+                <span className="brand-edition-badge">ATELIER</span>
               </div>
               <span className="brand-subtext">PRECISION HARDWARE LABS</span>
             </div>
           </div>
 
           <p style={{ color: '#94a3b8', fontSize: '0.86rem', lineHeight: '1.65', maxWidth: '380px', marginBottom: '20px' }}>
-            Architectural desktop hardware, lossless spatial acoustics, and milled instruments crafted for the deep state of creative flow.
+            Bespoke acoustic hardware, milled aerospace titanium instruments, and radiant desktop architecture crafted for the pinnacle of creative flow.
           </p>
 
           <div className="telemetry-status-badge">
             <span className="pulse-dot"></span>
-            <span>Global Systems: Operational &amp; Dispatching</span>
+            <span>Global Atelier Telemetry: Operational &amp; Dispatching</span>
           </div>
         </div>
 

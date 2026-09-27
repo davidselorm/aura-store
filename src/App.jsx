@@ -10,6 +10,7 @@ import CheckoutModal from './components/CheckoutModal';
 import OrdersDrawer from './components/OrdersDrawer';
 import Toast from './components/Toast';
 import Footer from './components/Footer';
+import MobileDock from './components/MobileDock';
 import { PRODUCTS, CURRENCIES } from './data/products';
 import { PackageSearch } from 'lucide-react';
 
@@ -507,6 +508,17 @@ export default function App() {
 
       {/* Toast Feedback */}
       <Toast toasts={toasts} onDismiss={dismissToast} />
+
+      {/* Revolutionary Bottom Mobile Cyber Dock */}
+      <MobileDock
+        cartCount={totalCartCount}
+        wishlistCount={wishlist.length}
+        ordersCount={orders.length}
+        onOpenCart={() => setIsCartOpen(true)}
+        onOpenWishlist={() => setIsWishlistOpen(true)}
+        onOpenOrders={() => handleOpenOrders(null)}
+        onExplore={handleExploreScroll}
+      />
     </div>
   );
 }
