@@ -431,7 +431,7 @@ export default function App() {
                 isWishlisted={wishlist.some((item) => item.id === product.id)}
                 onToggleWishlist={handleToggleWishlist}
                 onQuickView={(prod) => setQuickViewProduct(prod)}
-                onAddToCart={(prod) => handleAddToCart(prod, 1)}
+                onAddToCart={(prod, qty = 1, color = null) => handleAddToCart(prod, qty, color)}
               />
             ))}
           </div>
