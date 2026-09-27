@@ -66,12 +66,11 @@ export default function App() {
     try {
       const saved = localStorage.getItem('aura_orders');
       if (saved) return JSON.parse(saved);
-      // Realistic starter order so user can immediately test telemetry & receipt
       return [
         {
           id: 'AUR-692104',
           createdAt: new Date(Date.now() - 36 * 60 * 60 * 1000).toISOString(),
-          status: 'In Transit',
+          status: 'Shipped',
           items: [
             {
               id: PRODUCTS[0].id,
@@ -93,7 +92,7 @@ export default function App() {
           currency: CURRENCIES.USD,
           subtotal: 348,
           discount: 30,
-          appliedPromo: { code: 'SAVE30', description: '$30 off orders above $100' },
+          appliedPromo: { code: 'SAVE30', description: '$30 off orders over $100' },
           shipping: 0,
           tax: 16,
           total: 334,
@@ -107,7 +106,7 @@ export default function App() {
           },
           paymentMethod: 'momo',
           trackingNumber: 'DHL-GH-829104',
-          estimatedDelivery: 'Tomorrow, by 4:00 PM',
+          estimatedDelivery: 'Tomorrow by 4:00 PM',
         },
       ];
     } catch {
@@ -155,7 +154,7 @@ export default function App() {
     setToasts((prev) => [...prev, { id, message }]);
     setTimeout(() => {
       setToasts((prev) => prev.filter((t) => t.id !== id));
-    }, 3500);
+    }, 3000);
   };
 
   const dismissToast = (id) => {
@@ -189,7 +188,7 @@ export default function App() {
       }
     });
 
-    showToast(`Added ${product.name} to your Bag`);
+    showToast(`Added ${product.name} to your cart`);
   };
 
   const handleUpdateCartQty = (productId, color, newQty) => {
@@ -213,7 +212,7 @@ export default function App() {
         (item) => !(item.id === productId && item.selectedColor?.name === color?.name)
       )
     );
-    showToast('Item removed from Bag');
+    showToast('Item removed from cart');
   };
 
   // Wishlist Operations
@@ -221,10 +220,10 @@ export default function App() {
     const exists = wishlist.some((item) => item.id === product.id);
     if (exists) {
       setWishlist((prev) => prev.filter((item) => item.id !== product.id));
-      showToast(`Removed from saved favorites`);
+      showToast('Removed from saved items');
     } else {
       setWishlist((prev) => [...prev, product]);
-      showToast(`Saved ${product.name} to favorites`);
+      showToast(`Saved ${product.name}`);
     }
   };
 
@@ -244,7 +243,7 @@ export default function App() {
     }
     setCart([]);
     setAppliedPromo(null);
-    showToast(`Order confirmed! Receipt dispatched to your email.`);
+    showToast('Order confirmed! Receipt sent to your email.');
   };
 
   const handleReorder = (items) => {
@@ -270,7 +269,7 @@ export default function App() {
     const demo = {
       id: `AUR-${Math.floor(100000 + Math.random() * 900000)}`,
       createdAt: new Date().toISOString(),
-      status: 'In Transit',
+      status: 'Shipped',
       items: [
         {
           id: PRODUCTS[1].id,
@@ -303,7 +302,7 @@ export default function App() {
     setOrders((prev) => [demo, ...prev]);
     setSelectedOrderId(demo.id);
     setIsOrdersOpen(true);
-    showToast('Sample order loaded into telemetry!');
+    showToast('Sample order loaded');
   };
 
   // Filter & Search Logic
@@ -352,9 +351,9 @@ export default function App() {
     <div className="app-container" id="top">
       {/* Top Notification Announcement */}
       <div className="announcement-bar">
-        <span className="announcement-badge">Global Launch</span>
+        <span className="announcement-badge">Free Shipping</span>
         <span>
-          Enjoy Free Express Delivery on orders over $150 • MTN MoMo, Telecel Cash &amp; Cards Accepted
+          Free shipping on orders over $150 • Credit card and Mobile Money accepted
         </span>
       </div>
 
@@ -372,7 +371,7 @@ export default function App() {
         onOpenOrders={() => handleOpenOrders(null)}
       />
 
-      {/* Hero Showcase */}
+      {/* Hero Section */}
       <HeroBanner
         onExplore={handleExploreScroll}
         onQuickView={(prod) => setQuickViewProduct(prod)}
@@ -406,9 +405,9 @@ export default function App() {
         {filteredProducts.length === 0 ? (
           <div className="empty-cart-state" style={{ minHeight: '300px' }}>
             <PackageSearch size={44} color="#64748b" />
-            <h4>No products match your criteria</h4>
+            <h4>No products match your search</h4>
             <p style={{ fontSize: '0.88rem' }}>
-              Try adjusting your search query or selecting a different category.
+              Try adjusting your search terms or choosing a different category.
             </p>
             <button
               className="btn-hero-secondary"
@@ -459,7 +458,7 @@ export default function App() {
         }}
       />
 
-      {/* Slide-Over Cart Drawer */}
+      {/* Cart Drawer */}
       <CartDrawer
         isOpen={isCartOpen}
         onClose={() => setIsCartOpen(false)}
@@ -483,7 +482,7 @@ export default function App() {
         onMoveToCart={(item) => handleAddToCart(item, 1)}
       />
 
-      {/* Multi-Step Checkout Modal */}
+      {/* Checkout Modal */}
       <CheckoutModal
         isOpen={isCheckoutOpen}
         onClose={() => setIsCheckoutOpen(false)}
@@ -494,7 +493,7 @@ export default function App() {
         onOpenOrders={(orderId) => handleOpenOrders(orderId)}
       />
 
-      {/* Orders & Digital Receipt Drawer */}
+      {/* Orders Drawer */}
       <OrdersDrawer
         isOpen={isOrdersOpen}
         onClose={() => setIsOrdersOpen(false)}
@@ -509,7 +508,7 @@ export default function App() {
       {/* Toast Feedback */}
       <Toast toasts={toasts} onDismiss={dismissToast} />
 
-      {/* Revolutionary Bottom Mobile Cyber Dock */}
+      {/* Bottom Mobile Navigation */}
       <MobileDock
         cartCount={totalCartCount}
         wishlistCount={wishlist.length}

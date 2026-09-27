@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, CreditCard, Smartphone, CheckCircle2, Lock, Sparkles, ArrowRight, FileText } from 'lucide-react';
+import { X, CreditCard, Smartphone, CheckCircle2, Lock, ArrowRight, FileText } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 export default function CheckoutModal({
@@ -107,10 +107,10 @@ export default function CheckoutModal({
     // Trigger celebratory confetti
     try {
       confetti({
-        particleCount: 120,
-        spread: 70,
+        particleCount: 80,
+        spread: 60,
         origin: { y: 0.6 },
-        colors: ['#38bdf8', '#0284c7', '#f59e0b', '#10b981', '#ffffff']
+        colors: ['#f5ba42', '#38bdf8', '#10b981', '#ffffff']
       });
     } catch (err) {
       console.log('Confetti effect:', err);
@@ -122,7 +122,7 @@ export default function CheckoutModal({
   return (
     <div className="modal-backdrop" onClick={onClose}>
       <div className="checkout-modal-content" onClick={(e) => e.stopPropagation()}>
-        <button id="checkout-close-btn" className="modal-close-btn" onClick={onClose}>
+        <button id="checkout-close-btn" className="modal-close-btn" onClick={onClose} title="Close checkout">
           <X size={18} />
         </button>
 
@@ -131,12 +131,12 @@ export default function CheckoutModal({
           <div className="checkout-step-indicator">
             <div className={`step-item ${step === 'shipping' ? 'active' : ''}`}>
               <span className="step-num">1</span>
-              <span>Delivery Details</span>
+              <span>Shipping Details</span>
             </div>
             <span style={{ color: '#475569' }}>—</span>
             <div className={`step-item ${step === 'payment' ? 'active' : ''}`}>
               <span className="step-num">2</span>
-              <span>Secure Payment</span>
+              <span>Payment</span>
             </div>
           </div>
         )}
@@ -144,9 +144,9 @@ export default function CheckoutModal({
         {/* Step 1: Shipping Form */}
         {step === 'shipping' && (
           <form onSubmit={handleProceedToPayment}>
-            <h3 style={{ fontSize: '1.3rem', marginBottom: '8px' }}>Shipping Information</h3>
+            <h3 style={{ fontSize: '1.3rem', marginBottom: '8px' }}>Shipping Address</h3>
             <p style={{ color: '#94a3b8', fontSize: '0.85rem', marginBottom: '20px' }}>
-              Where should we dispatch your hardware?
+              Please enter the address where you want your order delivered.
             </p>
 
             <div className="form-grid">
@@ -164,7 +164,7 @@ export default function CheckoutModal({
               </div>
 
               <div className="form-group full-width">
-                <label className="form-label">Email Address for Dispatch Tracking</label>
+                <label className="form-label">Email Address</label>
                 <input
                   id="checkout-email"
                   type="email"
@@ -177,7 +177,7 @@ export default function CheckoutModal({
               </div>
 
               <div className="form-group full-width">
-                <label className="form-label">Delivery Street Address</label>
+                <label className="form-label">Street Address</label>
                 <input
                   id="checkout-address"
                   type="text"
@@ -190,7 +190,7 @@ export default function CheckoutModal({
               </div>
 
               <div className="form-group">
-                <label className="form-label">City / Region</label>
+                <label className="form-label">City</label>
                 <input
                   id="checkout-city"
                   type="text"
@@ -259,7 +259,7 @@ export default function CheckoutModal({
                 onClick={() => setPaymentMethod('card')}
               >
                 <CreditCard size={20} style={{ margin: '0 auto 6px' }} />
-                <div style={{ fontSize: '0.8rem', fontWeight: 600 }}>Credit Card</div>
+                <div style={{ fontSize: '0.8rem', fontWeight: 600 }}>Credit or Debit Card</div>
               </div>
 
               <div
@@ -276,8 +276,8 @@ export default function CheckoutModal({
                 className={`payment-method-card ${paymentMethod === 'applepay' ? 'active' : ''}`}
                 onClick={() => setPaymentMethod('applepay')}
               >
-                <Sparkles size={20} style={{ margin: '0 auto 6px' }} />
-                <div style={{ fontSize: '0.8rem', fontWeight: 600 }}>Instant Pay</div>
+                <div style={{ fontSize: '1.1rem', fontWeight: 700, margin: '0 auto 4px' }}>Pay</div>
+                <div style={{ fontSize: '0.8rem', fontWeight: 600 }}>Apple Pay</div>
               </div>
             </div>
 
@@ -296,7 +296,7 @@ export default function CheckoutModal({
                   />
                 </div>
                 <div className="form-group">
-                  <label className="form-label">Expiry Date</label>
+                  <label className="form-label">Expiration Date</label>
                   <input
                     type="text"
                     name="cardExp"
@@ -308,7 +308,7 @@ export default function CheckoutModal({
                   />
                 </div>
                 <div className="form-group">
-                  <label className="form-label">CVC / CVV</label>
+                  <label className="form-label">Security Code (CVV)</label>
                   <input
                     type="password"
                     name="cardCvc"
@@ -339,7 +339,7 @@ export default function CheckoutModal({
                   </select>
                 </div>
                 <div className="form-group full-width">
-                  <label className="form-label">Mobile Money Wallet Number</label>
+                  <label className="form-label">Phone Number</label>
                   <input
                     type="tel"
                     name="momoPhone"
@@ -350,7 +350,7 @@ export default function CheckoutModal({
                   />
                 </div>
                 <p style={{ gridColumn: 'span 2', fontSize: '0.78rem', color: '#94a3b8' }}>
-                  A prompt will be sent to your phone to authorize the transaction of {currency.symbol}{total}.
+                  A payment authorization prompt will be sent to your phone for {currency.symbol}{total}.
                 </p>
               </div>
             )}
@@ -358,10 +358,10 @@ export default function CheckoutModal({
             {paymentMethod === 'applepay' && (
               <div style={{ padding: '24px', background: 'rgba(255,255,255,0.02)', borderRadius: '10px', textAlign: 'center', border: '1px solid rgba(255,255,255,0.06)' }}>
                 <p style={{ fontSize: '0.9rem', color: '#f8fafc', marginBottom: '8px' }}>
-                  Biometric 1-Click Checkout
+                  Pay with Apple Pay or device credentials
                 </p>
                 <p style={{ fontSize: '0.8rem', color: '#94a3b8' }}>
-                  Use Touch ID, Face ID, or Google Pay credentials on your device.
+                  Confirm payment using Face ID, Touch ID, or your device passcode.
                 </p>
               </div>
             )}
@@ -369,11 +369,11 @@ export default function CheckoutModal({
             {/* Total summary before payment */}
             <div style={{ marginTop: '24px', padding: '16px', background: 'rgba(255,255,255,0.03)', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.06)' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.88rem', color: '#94a3b8', marginBottom: '6px' }}>
-                <span>Total Items ({cart.length})</span>
+                <span>Items ({cart.length})</span>
                 <span>{currency.symbol}{subtotal}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '1.1rem', fontWeight: 800, color: '#fff' }}>
-                <span>Final Amount Charged</span>
+                <span>Total</span>
                 <span style={{ color: '#f5ba42' }}>{currency.symbol}{total}</span>
               </div>
             </div>
@@ -381,7 +381,7 @@ export default function CheckoutModal({
             <div style={{ marginTop: '24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontSize: '0.76rem', color: '#64748b' }}>
                 <Lock size={14} />
-                <span>256-Bit SSL Encrypted Transaction</span>
+                <span>Secure 256-bit encrypted checkout</span>
               </div>
 
               <button
@@ -390,7 +390,7 @@ export default function CheckoutModal({
                 className="btn-checkout-primary"
                 style={{ width: 'auto', padding: '12px 28px' }}
               >
-                <span>Authorize &amp; Pay {currency.symbol}{total}</span>
+                <span>Pay {currency.symbol}{total}</span>
               </button>
             </div>
           </form>
@@ -403,14 +403,14 @@ export default function CheckoutModal({
               <CheckCircle2 size={36} />
             </div>
 
-            <h2 style={{ fontSize: '1.8rem', marginBottom: '8px' }}>Order Confirmed!</h2>
+            <h2 style={{ fontSize: '1.8rem', marginBottom: '8px' }}>Thank you for your order!</h2>
             <p style={{ color: '#94a3b8', fontSize: '0.9rem', marginBottom: '18px' }}>
-              Thank you, <strong>{formData.fullName}</strong>. Your payment was authorized.
+              Your order has been received and confirmed.
             </p>
 
             <div style={{ background: 'rgba(245, 186, 66, 0.12)', border: '1px solid rgba(245, 186, 66, 0.35)', padding: '16px', borderRadius: '12px', maxWidth: '380px', margin: '0 auto 24px' }}>
               <div style={{ fontSize: '0.75rem', color: '#f5ba42', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 700 }}>
-                Order Reference Code
+                Order Number
               </div>
               <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#fff', letterSpacing: '0.05em', marginTop: '4px' }}>
                 {orderId}
@@ -418,7 +418,7 @@ export default function CheckoutModal({
             </div>
 
             <p style={{ fontSize: '0.85rem', color: '#94a3b8', maxWidth: '420px', margin: '0 auto 24px' }}>
-              A confirmation receipt and courier tracking link have been dispatched to{' '}
+              We have sent a receipt and tracking updates to{' '}
               <strong style={{ color: '#fff' }}>{formData.email}</strong>.
             </p>
 
@@ -433,7 +433,7 @@ export default function CheckoutModal({
                 }}
               >
                 <FileText size={16} />
-                <span>View Digital Receipt</span>
+                <span>View Order Details</span>
               </button>
               <button
                 id="success-done-btn"

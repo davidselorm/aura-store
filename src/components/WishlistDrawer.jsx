@@ -28,9 +28,9 @@ export default function WishlistDrawer({
         <div className="drawer-header">
           <h3>
             <Heart size={20} color="#f43f5e" fill="#f43f5e" />
-            <span>Saved Favorites ({wishlist.length})</span>
+            <span>Saved Items ({wishlist.length})</span>
           </h3>
-          <button id="wishlist-drawer-close-btn" className="drawer-close-btn" onClick={onClose}>
+          <button id="wishlist-drawer-close-btn" className="drawer-close-btn" onClick={onClose} title="Close saved items">
             <X size={18} />
           </button>
         </div>
@@ -41,7 +41,7 @@ export default function WishlistDrawer({
             <Heart size={48} color="#f43f5e" />
             <h4>No Saved Items Yet</h4>
             <p style={{ fontSize: '0.85rem' }}>
-              Tap the heart icon on any product to save it for later review.
+              Click the heart icon on any product to save it here for later.
             </p>
             <button
               id="empty-wishlist-shop-btn"
@@ -49,7 +49,7 @@ export default function WishlistDrawer({
               style={{ marginTop: '20px' }}
               onClick={onClose}
             >
-              Browse Catalog
+              Browse Products
             </button>
           </div>
         ) : (
@@ -82,13 +82,13 @@ export default function WishlistDrawer({
                           }}
                         >
                           <ShoppingBag size={14} />
-                          <span>Move to Bag</span>
+                          <span>Move to Cart</span>
                         </button>
 
                         <button
                           className="cart-item-delete"
                           onClick={() => onRemoveFromWishlist(item.id)}
-                          title="Remove from favorites"
+                          title="Remove item"
                         >
                           <Trash2 size={16} />
                         </button>

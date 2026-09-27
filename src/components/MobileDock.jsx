@@ -11,25 +11,25 @@ export default function MobileDock({
   onExplore,
 }) {
   return (
-    <nav className="mobile-cyber-dock" aria-label="Mobile Navigation Dock">
+    <nav className="mobile-dock" aria-label="Mobile Navigation">
       <div className="mobile-dock-inner">
-        {/* Explore / Catalog Tab */}
+        {/* Shop / Catalog Tab */}
         <button
           className="dock-item"
           onClick={onExplore}
-          title="Explore Hardware Catalog"
+          title="Browse Products"
         >
           <div className="dock-icon-wrap">
             <Compass size={20} />
           </div>
-          <span className="dock-label">Studio</span>
+          <span className="dock-label">Shop</span>
         </button>
 
-        {/* Wishlist Tab */}
+        {/* Saved Items Tab */}
         <button
           className="dock-item"
           onClick={onOpenWishlist}
-          title="Saved Favorites"
+          title="Saved Items"
         >
           <div className="dock-icon-wrap">
             <Heart size={20} />
@@ -37,14 +37,14 @@ export default function MobileDock({
               <span className="dock-badge">{wishlistCount}</span>
             )}
           </div>
-          <span className="dock-label">Favorites</span>
+          <span className="dock-label">Saved</span>
         </button>
 
-        {/* Orders & Telemetry Tab */}
+        {/* Orders Tab */}
         <button
           className="dock-item"
           onClick={onOpenOrders}
-          title="Telemetry & Receipts"
+          title="Your Orders"
         >
           <div className="dock-icon-wrap">
             <Package size={20} />
@@ -52,14 +52,14 @@ export default function MobileDock({
               <span className="dock-badge green">{ordersCount}</span>
             )}
           </div>
-          <span className="dock-label">Telemetry</span>
+          <span className="dock-label">Orders</span>
         </button>
 
-        {/* Shopping Bag Tab */}
+        {/* Shopping Cart Tab */}
         <button
           className="dock-item primary-bag"
           onClick={onOpenCart}
-          title="Shopping Bag"
+          title="Shopping Cart"
         >
           <div className="dock-icon-wrap">
             <ShoppingBag size={20} />
@@ -67,7 +67,7 @@ export default function MobileDock({
               <span className="dock-badge amber">{cartCount}</span>
             )}
           </div>
-          <span className="dock-label">Bag</span>
+          <span className="dock-label">Cart</span>
         </button>
       </div>
     </nav>

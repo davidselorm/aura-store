@@ -5,17 +5,14 @@ import {
   PackageSearch,
   CheckCircle2,
   Truck,
-  Clock,
   Printer,
   Copy,
   Check,
   ArrowLeft,
   ShoppingBag,
-  ExternalLink,
   ShieldCheck,
   CreditCard,
   Smartphone,
-  Sparkles,
 } from 'lucide-react';
 
 export default function OrdersDrawer({
@@ -93,7 +90,7 @@ export default function OrdersDrawer({
                 className="nav-icon-btn"
                 style={{ width: '30px', height: '30px', padding: 0 }}
                 onClick={() => setActiveTab('all')}
-                title="Back to All Orders"
+                title="Back to all orders"
               >
                 <ArrowLeft size={16} />
               </button>
@@ -102,12 +99,12 @@ export default function OrdersDrawer({
               <Package size={20} color="#f5ba42" />
               <span>
                 {activeTab === 'receipt' && currentOrder
-                  ? `Receipt #${currentOrder.id}`
-                  : `Order Telemetry (${orders.length})`}
+                  ? `Order #${currentOrder.id}`
+                  : `Your Orders (${orders.length})`}
               </span>
             </h3>
           </div>
-          <button id="orders-drawer-close-btn" className="drawer-close-btn" onClick={onClose}>
+          <button id="orders-drawer-close-btn" className="drawer-close-btn" onClick={onClose} title="Close orders">
             <X size={18} />
           </button>
         </div>
@@ -116,13 +113,13 @@ export default function OrdersDrawer({
         {orders.length === 0 ? (
           <div className="empty-cart-state" style={{ padding: '60px 24px', textAlign: 'center' }}>
             <PackageSearch size={52} color="#64748b" style={{ margin: '0 auto 16px' }} />
-            <h4>No Orders on Record</h4>
+            <h4>No Orders Yet</h4>
             <p style={{ fontSize: '0.85rem', color: '#94a3b8', maxWidth: '340px', margin: '0 auto 20px' }}>
-              When you purchase hardware from AURA Atelier, your real-time courier telemetry and printable digital receipts will appear here.
+              When you place an order, its delivery status and receipt details will appear here.
             </p>
             <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
               <button className="btn-hero-primary" onClick={onClose}>
-                Browse Collection
+                Browse Products
               </button>
               {onLoadDemoOrder && (
                 <button
@@ -130,24 +127,22 @@ export default function OrdersDrawer({
                   onClick={onLoadDemoOrder}
                   title="Generate a sample order to test the receipt view"
                 >
-                  <Sparkles size={14} />
-                  <span>Preview Sample Receipt</span>
+                  <span>Preview Sample Order</span>
                 </button>
               )}
             </div>
           </div>
         ) : activeTab === 'receipt' && currentOrder ? (
           /* ==============================================================
-             SINGLE ORDER DIGITAL RECEIPT VIEW
+             SINGLE ORDER RECEIPT VIEW
              ============================================================== */
           <div className="receipt-scroll-container">
-            {/* Telemetry Status Banner */}
+            {/* Status Banner */}
             <div className="receipt-telemetry-banner">
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '14px' }}>
                 <div>
                   <span className="telemetry-badge">
-                    <span className="pulse-dot"></span>
-                    Live Courier Telemetry
+                    Delivery Status
                   </span>
                   <div style={{ fontSize: '1.25rem', fontWeight: 800, color: '#fff', marginTop: '6px' }}>
                     {currentOrder.status || 'Confirmed'}
@@ -160,7 +155,7 @@ export default function OrdersDrawer({
                 <button
                   className="receipt-print-btn"
                   onClick={handlePrint}
-                  title="Print Digital Receipt or Save as PDF"
+                  title="Print receipt or save as PDF"
                 >
                   <Printer size={15} />
                   <span>Print Receipt</span>
@@ -173,21 +168,21 @@ export default function OrdersDrawer({
                   <div className="step-icon">
                     <CheckCircle2 size={14} />
                   </div>
-                  <div className="step-label">Authorized</div>
+                  <div className="step-label">Placed</div>
                 </div>
                 <div className="timeline-connector completed"></div>
                 <div className="timeline-step completed">
                   <div className="step-icon">
                     <CheckCircle2 size={14} />
                   </div>
-                  <div className="step-label">Bench Tested</div>
+                  <div className="step-label">Processing</div>
                 </div>
                 <div className="timeline-connector active"></div>
                 <div className="timeline-step active">
                   <div className="step-icon">
                     <Truck size={14} />
                   </div>
-                  <div className="step-label">In Transit</div>
+                  <div className="step-label">Shipped</div>
                 </div>
                 <div className="timeline-connector"></div>
                 <div className="timeline-step">
@@ -199,19 +194,19 @@ export default function OrdersDrawer({
               </div>
             </div>
 
-            {/* Courier & Waybill Box */}
+            {/* Courier & Tracking Box */}
             <div className="receipt-courier-box">
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div>
                   <div style={{ fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: '#64748b', fontWeight: 700 }}>
-                    Courier Waybill Number
+                    Tracking Number
                   </div>
                   <div style={{ fontSize: '1rem', fontWeight: 700, color: '#f5ba42', letterSpacing: '0.04em', marginTop: '2px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <span>{currentOrder.trackingNumber || 'DHL-GH-8392104'}</span>
                     <button
                       className="copy-btn"
                       onClick={() => handleCopyTracking(currentOrder.trackingNumber || 'DHL-GH-8392104')}
-                      title="Copy Waybill code"
+                      title="Copy tracking code"
                     >
                       {copiedTracking ? <Check size={13} color="#10b981" /> : <Copy size={13} />}
                     </button>
@@ -220,21 +215,21 @@ export default function OrdersDrawer({
 
                 <div style={{ textAlign: 'right' }}>
                   <div style={{ fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: '#64748b', fontWeight: 700 }}>
-                    Est. Arrival
+                    Estimated Delivery
                   </div>
                   <div style={{ fontSize: '0.92rem', fontWeight: 700, color: '#fff', marginTop: '2px' }}>
-                    {currentOrder.estimatedDelivery || 'Within 2-3 Business Days'}
+                    {currentOrder.estimatedDelivery || 'Within 2-3 business days'}
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Destination & Payment Info Grid */}
+            {/* Address & Payment Info Grid */}
             <div className="receipt-meta-grid">
               <div className="receipt-meta-card">
-                <div className="meta-card-title">Dispatch Destination</div>
+                <div className="meta-card-title">Shipping Address</div>
                 <div style={{ fontWeight: 600, color: '#f8fafc', fontSize: '0.88rem' }}>
-                  {currentOrder.shippingInfo?.fullName || 'Valued Customer'}
+                  {currentOrder.shippingInfo?.fullName || 'Customer'}
                 </div>
                 <div style={{ fontSize: '0.8rem', color: '#94a3b8', marginTop: '2px' }}>
                   {currentOrder.shippingInfo?.address || '14 Independence Avenue'},{' '}
@@ -247,7 +242,7 @@ export default function OrdersDrawer({
               </div>
 
               <div className="receipt-meta-card">
-                <div className="meta-card-title">Payment Verification</div>
+                <div className="meta-card-title">Payment Method</div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 600, color: '#f8fafc', fontSize: '0.88rem' }}>
                   {currentOrder.paymentMethod === 'momo' ? (
                     <>
@@ -256,8 +251,7 @@ export default function OrdersDrawer({
                     </>
                   ) : currentOrder.paymentMethod === 'applepay' ? (
                     <>
-                      <Sparkles size={15} color="#f5ba42" />
-                      <span>Apple Pay / Instant</span>
+                      <span>Apple Pay</span>
                     </>
                   ) : (
                     <>
@@ -268,7 +262,7 @@ export default function OrdersDrawer({
                 </div>
                 <div style={{ fontSize: '0.8rem', color: '#10b981', marginTop: '4px', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
                   <ShieldCheck size={14} />
-                  <span>Verified &amp; Settled</span>
+                  <span>Paid successfully</span>
                 </div>
               </div>
             </div>
@@ -276,7 +270,7 @@ export default function OrdersDrawer({
             {/* Purchased Items List */}
             <div className="receipt-items-section">
               <div style={{ fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.06em', color: '#94a3b8', fontWeight: 700, marginBottom: '10px' }}>
-                Itemized Manifest ({currentOrder.items?.reduce((s, i) => s + (i.quantity || 1), 0) || 1} units)
+                Items Ordered ({currentOrder.items?.reduce((s, i) => s + (i.quantity || 1), 0) || 1})
               </div>
 
               <div className="receipt-items-list">
@@ -332,7 +326,7 @@ export default function OrdersDrawer({
                 </div>
               )}
               <div className="summary-line">
-                <span>Courier Express Shipping</span>
+                <span>Shipping</span>
                 <span>
                   {currentOrder.shipping === 0
                     ? 'FREE'
@@ -346,7 +340,7 @@ export default function OrdersDrawer({
                 </span>
               </div>
               <div className="summary-line total">
-                <span>Total Settled</span>
+                <span>Total Paid</span>
                 <span>
                   {currentOrder.currency?.symbol || '$'}{currentOrder.total}
                 </span>
@@ -360,12 +354,12 @@ export default function OrdersDrawer({
                 style={{ flex: 1, justifyContent: 'center' }}
                 onClick={() => {
                   if (onReorder) onReorder(currentOrder.items);
-                  if (onShowToast) onShowToast('Items from this order added to your Bag!');
+                  if (onShowToast) onShowToast('Items from this order added to your cart!');
                   onClose();
                 }}
               >
                 <ShoppingBag size={16} />
-                <span>Reorder Items to Bag</span>
+                <span>Reorder Items</span>
               </button>
 
               {orders.length > 1 && (
@@ -385,7 +379,7 @@ export default function OrdersDrawer({
              ============================================================== */
           <div className="orders-list-container">
             <p style={{ fontSize: '0.82rem', color: '#94a3b8', marginBottom: '16px' }}>
-              Showing all recorded hardware dispatches associated with your active device session.
+              A record of your recent orders placed from this browser.
             </p>
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
@@ -414,7 +408,7 @@ export default function OrdersDrawer({
                         className={`status-pill ${
                           order.status === 'Delivered'
                             ? 'delivered'
-                            : order.status === 'In Transit'
+                            : order.status === 'In Transit' || order.status === 'Shipped'
                             ? 'transit'
                             : 'confirmed'
                         }`}
@@ -474,7 +468,7 @@ export default function OrdersDrawer({
                         Tracking: {order.trackingNumber || 'DHL Express'}
                       </span>
                       <span style={{ fontSize: '0.8rem', color: '#f5ba42', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
-                        <span>View Receipt &amp; Status</span>
+                        <span>View Details</span>
                         <span>→</span>
                       </span>
                     </div>

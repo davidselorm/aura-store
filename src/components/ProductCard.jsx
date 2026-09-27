@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Star, Heart, Eye, ShoppingBag, Check, Zap } from 'lucide-react';
+import { Star, Heart, Eye, ShoppingBag, Check } from 'lucide-react';
 
 export default function ProductCard({
   product,
@@ -32,7 +32,6 @@ export default function ProductCard({
       <div className="card-image-box" onClick={() => onQuickView(product)}>
         {product.badge && (
           <span className="card-badge">
-            <Zap size={11} className="badge-zap" />
             <span>{product.badge}</span>
           </span>
         )}
@@ -44,7 +43,7 @@ export default function ProductCard({
             e.stopPropagation();
             onToggleWishlist(product);
           }}
-          title={isWishlisted ? 'Remove from wishlist' : 'Save to wishlist'}
+          title={isWishlisted ? 'Remove from saved' : 'Save for later'}
         >
           <Heart size={16} fill={isWishlisted ? '#f43f5e' : 'none'} color={isWishlisted ? '#f43f5e' : '#94a3b8'} />
         </button>
@@ -67,7 +66,7 @@ export default function ProductCard({
             }}
           >
             <Eye size={15} />
-            <span>Inspect Hardware &amp; Specs</span>
+            <span>Quick View</span>
           </button>
         </div>
       </div>
@@ -77,7 +76,7 @@ export default function ProductCard({
         <div className="card-meta-row">
           <span className="card-category">{product.category}</span>
           <div className="card-rating">
-            <Star size={13} fill="#f59e0b" color="#f59e0b" />
+            <Star size={13} fill="#f5ba42" color="#f5ba42" />
             <span>{product.rating}</span>
             <span className="card-reviews-count">({product.reviewsCount})</span>
           </div>
@@ -116,7 +115,7 @@ export default function ProductCard({
           )}
         </div>
 
-        {/* Card Footer with Price and Add to Bag */}
+        {/* Card Footer with Price and Add to Cart */}
         <div className="card-footer">
           <div className="price-group">
             <div className="current-price">
@@ -137,13 +136,13 @@ export default function ProductCard({
           >
             {justAdded ? (
               <>
-                <Check size={15} />
-                <span>Added!</span>
+                <Check size={14} />
+                <span>Added</span>
               </>
             ) : (
               <>
                 <ShoppingBag size={14} />
-                <span>Add</span>
+                <span>Add to Cart</span>
               </>
             )}
           </button>

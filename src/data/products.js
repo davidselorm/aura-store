@@ -6,17 +6,17 @@ export const CURRENCIES = {
 };
 
 export const PROMO_CODES = {
-  'AURA20': { type: 'percent', value: 20, description: '20% off entire cart' },
-  'WELCOME10': { type: 'percent', value: 10, description: '10% welcome discount' },
-  'FREESHIP': { type: 'shipping', value: 100, description: 'Free Express Shipping' },
-  'SAVE30': { type: 'fixed', value: 30, description: '$30 off orders above $100' },
+  'AURA20': { type: 'percent', value: 20, description: '20% off your order' },
+  'WELCOME10': { type: 'percent', value: 10, description: '10% off your first order' },
+  'FREESHIP': { type: 'shipping', value: 100, description: 'Free standard shipping' },
+  'SAVE30': { type: 'fixed', value: 30, description: '$30 off orders over $100' },
 };
 
 export const PRODUCTS = [
   {
     id: 'aura-headphone-one',
-    name: 'AURA Sonic Pro ANC Headphones',
-    tagline: 'Lossless Spatial Audio & Hybrid Active Noise Cancellation',
+    name: 'AURA Sonic Pro Wireless Headphones',
+    tagline: 'High-fidelity wireless sound with active noise cancellation',
     category: 'Audio',
     price: 249,
     originalPrice: 299,
@@ -25,31 +25,31 @@ export const PRODUCTS = [
     image: '/images/products/headphones.jpg',
     inStock: true,
     stockCount: 14,
-    badge: 'Flagship Drop',
+    badge: 'Featured',
     colors: [
-      { name: 'Matte Obsidian', hex: '#1a1a1c' },
-      { name: 'Lunar Platinum', hex: '#d1d5db' },
-      { name: 'Rose Gold Accent', hex: '#b76e79' }
+      { name: 'Matte Black', hex: '#1a1a1c' },
+      { name: 'Silver Gray', hex: '#d1d5db' },
+      { name: 'Rose Gold', hex: '#b76e79' }
     ],
-    description: 'Engineered for audiophiles and high-focus creators. Custom 45mm neodymium drivers, dual micro-processors for real-time 48dB noise reduction, and an ultra-plush memory foam seal for all-day comfort.',
+    description: 'Comfortable over-ear headphones with rich sound, active noise cancellation, and a long-lasting battery. Perfect for work, travel, and everyday listening.',
     features: [
-      'Adaptive Hybrid ANC up to 48dB with transparency pass-through',
-      'Ultra-low latency Bluetooth 5.4 with aptX HD lossless streaming',
-      'Up to 55 hours playback with ANC off (42 hours with ANC on)',
-      '15-minute quick charge delivers 6 hours of continuous listening'
+      'Active noise cancellation with transparency mode',
+      'Bluetooth 5.4 for fast and stable connection',
+      'Up to 55 hours of battery life on a single charge',
+      'Fast charging: 15 minutes gives you 6 hours of playback'
     ],
     specs: {
-      'Driver Size': '45mm Custom Neodymium',
-      'Frequency Response': '10Hz – 40,000Hz',
-      'Battery Life': '55 Hours',
+      'Driver Size': '45mm drivers',
+      'Frequency Range': '10Hz – 40,000Hz',
+      'Battery Life': 'Up to 55 hours',
       'Weight': '255g',
-      'Microphones': '6 MEMS Beamforming Array'
+      'Connectivity': 'Bluetooth 5.4 and 3.5mm cable'
     }
   },
   {
     id: 'aura-keeb-75',
-    name: 'AURA Keeb 75 Custom Mechanical Keyboard',
-    tagline: 'Gasket-Mounted CNC Aluminum Chassis with Brass Rotary Encoder',
+    name: 'AURA Keeb 75 Mechanical Keyboard',
+    tagline: 'Compact aluminum mechanical keyboard with smooth linear switches',
     category: 'Keyboards',
     price: 189,
     originalPrice: 229,
@@ -58,31 +58,31 @@ export const PRODUCTS = [
     image: '/images/products/keyboard.jpg',
     inStock: true,
     stockCount: 8,
-    badge: 'Community Favorite',
+    badge: 'Popular',
     colors: [
-      { name: 'Graphite Slate', hex: '#2b2d35' },
-      { name: 'Anodized Silver', hex: '#c5c8d0' },
-      { name: 'Forest Matcha', hex: '#415343' }
+      { name: 'Dark Slate', hex: '#2b2d35' },
+      { name: 'Silver', hex: '#c5c8d0' },
+      { name: 'Forest Green', hex: '#415343' }
     ],
-    description: 'Precision milled from a single block of aerospace aluminum. Features factory-lubed custom linear switches, hot-swappable PCB, poron dampening foam, and a weighted brass knob for volume and media scrub.',
+    description: 'A solid aluminum mechanical keyboard built for smooth typing. Comes with hot-swappable switches, sound dampening foam, and a metal volume knob.',
     features: [
-      'Gasket-mounted acoustic dampening for deep, satisfying thock',
-      'Tri-mode connectivity: 2.4GHz Ultra-Fast, Bluetooth 5.2, USB-C',
-      'Double-shot PBT cherry profile keycaps with amber underglow',
-      'Hot-swappable 5-pin switches with VIA/QMK reprogrammable firmware'
+      'Gasket mount design for a quiet and comfortable typing feel',
+      'Three connection modes: Wireless USB, Bluetooth, and USB-C cable',
+      'Durable PBT keycaps with soft warm backlighting',
+      'Hot-swappable switch sockets for easy customization'
     ],
     specs: {
-      'Layout': '75% Compact (82 Keys)',
-      'Switches': 'Aura Linear Cream (Factory Lubed)',
-      'Plate Material': 'FR4 / Brass Hybrid',
-      'Weight': '1.42 kg',
-      'Backlight': 'Warm Amber / Per-key RGB'
+      'Layout': '75% compact (82 keys)',
+      'Switches': 'Pre-lubed linear switches',
+      'Frame': 'Solid aluminum body',
+      'Weight': '1.4 kg',
+      'Backlight': 'Warm white / amber backlight'
     }
   },
   {
     id: 'aura-titan-chronos',
-    name: 'TITANUS Chrono Sapphire Smartwatch',
-    tagline: 'Milled Titanium Case with Curved Sapphire Glass OLED Display',
+    name: 'AURA Chrono Titanium Smartwatch',
+    tagline: 'Durable titanium smartwatch with sapphire glass and AMOLED display',
     category: 'Wearables',
     price: 349,
     originalPrice: 399,
@@ -91,30 +91,30 @@ export const PRODUCTS = [
     image: '/images/products/smartwatch.jpg',
     inStock: true,
     stockCount: 5,
-    badge: 'Limited Edition',
+    badge: 'Top Pick',
     colors: [
-      { name: 'Brushed Titanium', hex: '#6b7280' },
-      { name: 'Midnight DLC', hex: '#111827' }
+      { name: 'Titanium Gray', hex: '#6b7280' },
+      { name: 'Midnight Black', hex: '#111827' }
     ],
-    description: 'A seamless blend of classical horology and modern telemetry. Housed in grade-5 titanium with a sapphire crystal touch face, continuous health biometrics, and a 14-day battery reserve.',
+    description: 'A sleek smartwatch built from lightweight titanium and scratch-resistant sapphire glass. Tracks your daily activity, heart rate, sleep, and workouts with up to 14 days of battery.',
     features: [
-      'Always-on 1.43-inch 1,000 nit high-density AMOLED display',
-      'Multi-band dual-frequency GNSS GPS with offline topographic maps',
-      'Advanced biometric tracking: ECG, SpO2, Heart Rate Variability & Sleep Score',
-      '50m Water Resistance (5 ATM) for swimming and open-water navigation'
+      'Bright 1.43-inch AMOLED screen that is easy to read outdoors',
+      'Built-in GPS for accurate walking, running, and cycling',
+      'Health tracking: heart rate, blood oxygen, and sleep score',
+      'Water resistant up to 50 meters (5 ATM)'
     ],
     specs: {
-      'Case Material': 'Grade-5 Aerospace Titanium',
-      'Glass': 'Scratch-Proof Curved Sapphire',
-      'Battery Life': 'Up to 14 Days Normal Usage',
-      'Sensors': 'Optical PPG, Bioimpedance, Compass, Barometer',
-      'Connectivity': 'Bluetooth 5.3 BLE & NFC Contactless Pay'
+      'Case Material': 'Grade-5 titanium',
+      'Glass': 'Scratch-resistant sapphire crystal',
+      'Battery Life': 'Up to 14 days',
+      'Water Resistance': '50 meters (5 ATM)',
+      'Compatibility': 'iOS and Android'
     }
   },
   {
     id: 'aura-ergoglide-mouse',
-    name: 'AURA ErgoGlide Precision Wireless Mouse',
-    tagline: 'Contoured Sculpted Grip with Machined Aluminum Free-Spin Wheel',
+    name: 'AURA ErgoGlide Wireless Mouse',
+    tagline: 'Comfortable ergonomic mouse with dual-mode metal scroll wheel',
     category: 'Desk Setup',
     price: 99,
     originalPrice: 120,
@@ -125,27 +125,27 @@ export const PRODUCTS = [
     stockCount: 22,
     badge: 'Best Seller',
     colors: [
-      { name: 'Matte Charcoal', hex: '#1f242e' },
-      { name: 'Chalk White', hex: '#f3f4f6' }
+      { name: 'Charcoal', hex: '#1f242e' },
+      { name: 'Off White', hex: '#f3f4f6' }
     ],
-    description: 'Crafted for designers, developers, and power users. Hand-sculpted ergonomic profile reduces wrist strain by 35%. Dual scroll modes with infinite inertia spin and hyper-accurate 26,000 DPI optical sensor.',
+    description: 'Designed for all-day comfort at your desk. Features a sculpted shape that supports your hand, a fast metal scroll wheel, and quiet click buttons.',
     features: [
-      'Machined aluminum MagSpeed scroll wheel with silent ratchet mode',
-      'PixArt 26K DPI optical sensor that tracks flawlessly even on glass',
-      'Seamless Multi-Device switching across 3 laptops/desktops with Flow',
-      'Silent tactile mechanical switches rated for 70 million clicks'
+      'High-speed metal scroll wheel with smooth and ratchet modes',
+      'Precise optical sensor that works on almost any desk surface',
+      'Connects to up to 3 computers with easy button switching',
+      'Quiet clicks that keep your workspace calm'
     ],
     specs: {
-      'Sensor': 'PixArt PAW3395 (26,000 DPI)',
-      'Battery Life': 'Up to 70 Days per charge',
-      'Weight': '88g Balanced',
-      'Charging': 'USB-C Fast Charging (1 min = 3 hours use)'
+      'Sensor': '26,000 DPI optical sensor',
+      'Battery Life': 'Up to 70 days per charge',
+      'Weight': '88g',
+      'Charging': 'USB-C fast charge'
     }
   },
   {
     id: 'aura-halo-lightbar',
-    name: 'AURA Halo Horizon Monitor Light Bar',
-    tagline: 'Asymmetric Zero-Glare Screen Glow with Ambient Wall Halo Backlight',
+    name: 'AURA Horizon Monitor Light Bar',
+    tagline: 'Screen-mounted desk lamp with wireless remote control dial',
     category: 'Desk Setup',
     price: 119,
     originalPrice: 145,
@@ -156,26 +156,26 @@ export const PRODUCTS = [
     stockCount: 19,
     badge: 'Popular',
     colors: [
-      { name: 'Anodized Space Gray', hex: '#374151' }
+      { name: 'Space Gray', hex: '#374151' }
     ],
-    description: 'Eliminates monitor reflection and reduces evening eye fatigue. Patented 45-degree asymmetric optical design casts light exclusively on your desk surface, while the rear RGB ambient halo casts soft back-illumination.',
+    description: 'Clips directly onto your monitor to light up your desk without casting glare onto your screen. Includes a wireless desktop dial to adjust brightness and warmth.',
     features: [
-      'Dual light sources: Front focused reading light + Rear ambient mood halo',
-      'Wireless 2.4G puck controller with stepless dial for brightness and color temp',
-      'Stepless color temperature adjustment from warm 2700K to daylight 6500K',
-      'CRI ≥ 97 for faithful color reproduction and graphic fidelity'
+      'Asymmetric lighting casts light on your desk with zero screen reflection',
+      'Wireless desktop knob to control brightness and color temperature',
+      'Adjustable warmth from cozy warm white (2700K) to crisp daylight (6500K)',
+      'Rear ambient backlight for comfortable evening work'
     ],
     specs: {
-      'Color Temp': '2700K – 6500K Tunable',
-      'Color Rendering': 'Ra97 High CRI',
-      'Controller': 'Wireless Desktop Rotary Puck',
-      'Compatibility': 'Flat & Curved Monitors (0.5cm - 4.5cm thickness)'
+      'Color Temperature': '2700K – 6500K adjustable',
+      'Color Accuracy': 'Ra97 high CRI',
+      'Controller': 'Wireless desktop dial',
+      'Mounting': 'Fits flat and curved computer monitors'
     }
   },
   {
     id: 'aura-quanta-charger',
-    name: 'QUANTA Glass Qi2 Wireless Fast Pad',
-    tagline: 'Milled Aluminum Base with Tempered Glass & Pulse Cyan Status Halo',
+    name: 'AURA Quanta Fast Wireless Charger',
+    tagline: '15W magnetic wireless charging pad with aluminum base',
     category: 'Charging',
     price: 65,
     originalPrice: 79,
@@ -184,23 +184,23 @@ export const PRODUCTS = [
     image: '/images/products/charger.jpg',
     inStock: true,
     stockCount: 31,
-    badge: 'New Release',
+    badge: 'New',
     colors: [
-      { name: 'Gunmetal Glass', hex: '#1e293b' },
-      { name: 'Silver Frost', hex: '#e2e8f0' }
+      { name: 'Dark Gray', hex: '#1e293b' },
+      { name: 'Silver White', hex: '#e2e8f0' }
     ],
-    description: 'Next-generation Qi2 wireless standard delivering a guaranteed 15W high-efficiency inductive charge without heat throttling. Features a frosted crystal top surface and gentle status breathing ring.',
+    description: 'Fast and reliable 15W wireless charging for your phone and earbuds. Made with an aluminum base and durable tempered glass top.',
     features: [
-      'Official Qi2 certified 15W magnetic rapid wireless power delivery',
-      'Internal whisper-quiet thermal dissipation fins prevent battery heat degradation',
-      'Intelligent Foreign Object Detection (FOD) with auto power cutoff',
-      'Includes premium braided 1.8m Kevlar reinforced USB-C to C cable'
+      'Fast 15W Qi2 and MagSafe compatible wireless charging',
+      'Built-in heat protection keeps your phone battery healthy',
+      'Subtle indicator light that does not disturb your room at night',
+      'Includes a durable 1.8m braided USB-C cable'
     ],
     specs: {
-      'Max Output': '15W Fast Charge (Qi2 & MagSafe)',
-      'Input': '9V/2.22A, 12V/1.67A Type-C',
-      'Materials': 'CNC Aluminum & Tempered Ion-Glass',
-      'Thickness': 'Only 6.2mm ultra-slim profile'
+      'Max Output': '15W fast charge',
+      'Input': 'USB-C fast charge',
+      'Materials': 'Aluminum base and tempered glass',
+      'Thickness': '6.2mm slim profile'
     }
   }
 ];

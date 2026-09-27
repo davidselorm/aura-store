@@ -67,7 +67,7 @@ export default function CartDrawer({
     if (PROMO_CODES[code]) {
       setAppliedPromo({ code, ...PROMO_CODES[code] });
       setPromoError('');
-      onShowToast(`Promo applied: ${PROMO_CODES[code].description}`);
+      onShowToast(`Discount code applied: ${PROMO_CODES[code].description}`);
     } else {
       setPromoError('Invalid code. Try "AURA20" or "WELCOME10"');
     }
@@ -80,9 +80,9 @@ export default function CartDrawer({
         <div className="drawer-header">
           <h3>
             <ShoppingBag size={20} color="#f5ba42" />
-            <span>Shopping Bag ({cart.reduce((s, i) => s + i.quantity, 0)})</span>
+            <span>Shopping Cart ({cart.reduce((s, i) => s + i.quantity, 0)})</span>
           </h3>
-          <button id="cart-drawer-close-btn" className="drawer-close-btn" onClick={onClose}>
+          <button id="cart-drawer-close-btn" className="drawer-close-btn" onClick={onClose} title="Close cart">
             <X size={18} />
           </button>
         </div>
@@ -92,11 +92,11 @@ export default function CartDrawer({
           <div className="shipping-text">
             {isFreeShipping ? (
               <span style={{ color: '#34d399', fontWeight: 600 }}>
-                🎉 You've unlocked Free Express Shipping!
+                Free shipping unlocked!
               </span>
             ) : (
               <span>
-                Add <strong>{currency.symbol}{diffConverted}</strong> more for Free Shipping
+                Add <strong>{currency.symbol}{diffConverted}</strong> more for free shipping
               </span>
             )}
             <span>{progressPercent}%</span>
@@ -110,9 +110,9 @@ export default function CartDrawer({
         {cart.length === 0 ? (
           <div className="empty-cart-state">
             <ShoppingBag size={48} />
-            <h4>Your Bag is Empty</h4>
+            <h4>Your Cart is Empty</h4>
             <p style={{ fontSize: '0.85rem' }}>
-              Explore our new hardware collection and find your flow.
+              Your cart is currently empty. Browse our products to add items.
             </p>
             <button
               id="empty-cart-shop-btn"
@@ -120,7 +120,7 @@ export default function CartDrawer({
               style={{ marginTop: '20px' }}
               onClick={onClose}
             >
-              Start Shopping
+              Browse Products
             </button>
           </div>
         ) : (
@@ -144,6 +144,7 @@ export default function CartDrawer({
                         <button
                           className="qty-btn"
                           onClick={() => onUpdateQty(item.id, item.selectedColor, item.quantity - 1)}
+                          title="Decrease quantity"
                         >
                           -
                         </button>
@@ -151,6 +152,7 @@ export default function CartDrawer({
                         <button
                           className="qty-btn"
                           onClick={() => onUpdateQty(item.id, item.selectedColor, item.quantity + 1)}
+                          title="Increase quantity"
                         >
                           +
                         </button>
@@ -183,7 +185,7 @@ export default function CartDrawer({
               <input
                 id="cart-promo-input"
                 type="text"
-                placeholder='Enter "AURA20" or "WELCOME10"'
+                placeholder='Enter promo code (e.g. AURA20)'
                 className="promo-input"
                 value={promoInput}
                 onChange={(e) => setPromoInput(e.target.value)}
@@ -211,12 +213,12 @@ export default function CartDrawer({
               </div>
               {discount > 0 && (
                 <div className="summary-line discount-text">
-                  <span>Promo Discount</span>
+                  <span>Discount</span>
                   <span>-{currency.symbol}{discount}</span>
                 </div>
               )}
               <div className="summary-line">
-                <span>Estimated Shipping</span>
+                <span>Shipping</span>
                 <span>{shipping === 0 ? 'FREE' : `${currency.symbol}${shipping}`}</span>
               </div>
               <div className="summary-line">
@@ -224,7 +226,7 @@ export default function CartDrawer({
                 <span>{currency.symbol}{tax}</span>
               </div>
               <div className="summary-line total">
-                <span>Total Due</span>
+                <span>Total</span>
                 <span>{currency.symbol}{total}</span>
               </div>
             </div>

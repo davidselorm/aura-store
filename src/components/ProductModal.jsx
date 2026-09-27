@@ -44,7 +44,7 @@ export default function ProductModal({
     <div className="modal-backdrop" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         {/* Close Button */}
-        <button id="modal-close-btn" className="modal-close-btn" onClick={onClose}>
+        <button id="modal-close-btn" className="modal-close-btn" onClick={onClose} title="Close window">
           <X size={18} />
         </button>
 
@@ -72,7 +72,7 @@ export default function ProductModal({
               </span>
             )}
             <div className="card-rating" style={{ marginLeft: 'auto' }}>
-              <Star size={14} fill="#f59e0b" />
+              <Star size={14} fill="#f5ba42" color="#f5ba42" />
               <span>{product.rating}</span>
               <span className="card-reviews-count">({product.reviewsCount} reviews)</span>
             </div>
@@ -101,7 +101,7 @@ export default function ProductModal({
           )}
 
           {/* Feature Highlights */}
-          <div className="modal-section-label">Key Highlights</div>
+          <div className="modal-section-label">Key Features</div>
           <ul className="modal-features-list">
             {product.features?.map((f, i) => (
               <li key={i} className="modal-feature-item">
@@ -114,7 +114,7 @@ export default function ProductModal({
           {/* Specs Table */}
           {product.specs && (
             <div style={{ marginBottom: '24px' }}>
-              <div className="modal-section-label">Technical Specifications</div>
+              <div className="modal-section-label">Specifications</div>
               <div className="modal-specs-box">
                 {Object.entries(product.specs).map(([key, val]) => (
                   <div key={key} className="modal-spec-entry">
@@ -133,6 +133,7 @@ export default function ProductModal({
                 className="qty-btn"
                 style={{ width: '38px', height: '100%' }}
                 onClick={() => setQuantity(Math.max(1, quantity - 1))}
+                title="Decrease quantity"
               >
                 -
               </button>
@@ -143,6 +144,7 @@ export default function ProductModal({
                 className="qty-btn"
                 style={{ width: '38px', height: '100%' }}
                 onClick={() => setQuantity(quantity + 1)}
+                title="Increase quantity"
               >
                 +
               </button>
@@ -157,12 +159,12 @@ export default function ProductModal({
               {added ? (
                 <>
                   <Check size={18} />
-                  <span>Added to Bag!</span>
+                  <span>Added to Cart!</span>
                 </>
               ) : (
                 <>
                   <ShoppingBag size={18} />
-                  <span>Add to Bag</span>
+                  <span>Add to Cart</span>
                 </>
               )}
             </button>
@@ -172,7 +174,7 @@ export default function ProductModal({
               className="btn-hero-secondary"
               onClick={handleDirectBuy}
             >
-              <span>Instant Buy</span>
+              <span>Buy Now</span>
               <ArrowRight size={16} />
             </button>
           </div>

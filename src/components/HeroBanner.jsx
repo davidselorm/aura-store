@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowRight, Star, ShieldCheck, Zap, Sparkles, Cpu, Disc3 } from 'lucide-react';
+import { ArrowRight, Star, ShieldCheck, Truck, RotateCcw } from 'lucide-react';
 import { PRODUCTS } from '../data/products';
 
 export default function HeroBanner({ onExplore, onQuickView, featuredProduct, currency }) {
@@ -9,47 +9,40 @@ export default function HeroBanner({ onExplore, onQuickView, featuredProduct, cu
   const convertedPrice = Math.round(activeProduct.price * currency.rate);
   const originalPrice = Math.round(activeProduct.originalPrice * currency.rate);
 
-  const FLAGSHIPS = [
-    { label: '01 • Audio', productIdx: 0, tag: '48dB Lossless ANC' },
-    { label: '02 • Custom Keyboards', productIdx: 1, tag: 'Gasket Milled Brass' },
-    { label: '03 • Horology', productIdx: 2, tag: 'Sapphire & Grade-5 Ti' },
-    { label: '04 • Ergonomics', productIdx: 3, tag: '26K DPI MagSpeed' },
+  const CATEGORY_TABS = [
+    { label: 'Headphones', productIdx: 0 },
+    { label: 'Keyboard', productIdx: 1 },
+    { label: 'Smartwatch', productIdx: 2 },
+    { label: 'Wireless Mouse', productIdx: 3 },
   ];
 
   return (
     <section className="hero-section">
       <div className="hero-card">
-        {/* Bioluminescent Warm Amber & Liquid Platinum Orbs */}
-        <div className="hero-aurora-glow gold"></div>
-        <div className="hero-aurora-glow emerald"></div>
-
-        {/* Hero Left Content */}
+        {/* Left Column: Simple & Clear Copy */}
         <div className="hero-left-content">
           <div className="hero-badge-row">
             <span className="hero-tag">
-              <Sparkles size={13} className="hero-tag-icon" />
-              <span>AURA ATELIER • AUTUMN 2026</span>
+              <span>New Arrivals 2026</span>
             </span>
             <span className="hero-dispatch-indicator">
-              <span className="pulse-dot"></span>
-              Live Dispatch Active • Global Express
+              Free shipping on orders over $150
             </span>
           </div>
 
           <h1 className="hero-title">
-            Milled From Silence. <br />
-            <span className="hero-title-gradient">Engineered For The Few.</span>
+            Simple, reliable tech <br />
+            <span className="hero-title-gradient">built for daily work.</span>
           </h1>
 
           <p className="hero-subtitle">
-            Monolithic grade-5 titanium chassis, acoustically dampening poron isolation, and low-latency telemetry.
-            Designed strictly for creators who operate in uninterrupted creative flow.
+            Thoughtfully engineered headphones, keyboards, and desk accessories. Clean design, durable materials, and everyday comfort.
           </p>
 
-          {/* Interactive Flagship Channels */}
+          {/* Product selector tabs */}
           <div className="hero-product-switcher">
             <div className="switcher-pills">
-              {FLAGSHIPS.map((item, idx) => (
+              {CATEGORY_TABS.map((item) => (
                 <button
                   key={item.label}
                   className={`switcher-pill-btn ${selectedIdx === item.productIdx ? 'active' : ''}`}
@@ -61,15 +54,15 @@ export default function HeroBanner({ onExplore, onQuickView, featuredProduct, cu
             </div>
           </div>
 
-          {/* CTA Actions */}
+          {/* Action buttons */}
           <div className="hero-actions">
             <button
               id="hero-explore-btn"
               className="btn-hero-primary"
               onClick={onExplore}
             >
-              <span>Explore The Atelier</span>
-              <ArrowRight size={17} />
+              <span>Shop All Products</span>
+              <ArrowRight size={16} />
             </button>
 
             <button
@@ -77,59 +70,55 @@ export default function HeroBanner({ onExplore, onQuickView, featuredProduct, cu
               className="btn-hero-secondary"
               onClick={() => onQuickView(activeProduct)}
             >
-              <Disc3 size={16} color="#f5ba42" />
-              <span>Inspect {activeProduct.name.split(' ')[1]}</span>
+              <span>View Product Details</span>
             </button>
           </div>
 
-          {/* Precision Engineering Specs */}
+          {/* Key store benefits */}
           <div className="hero-stats-row">
             <div className="hero-stat-item">
               <div className="stat-value-row">
-                <Star size={13} fill="#f5ba42" color="#f5ba42" />
-                <h4>4.98 / 5.0</h4>
+                <Truck size={14} color="#f5ba42" />
+                <h4>Fast Delivery</h4>
               </div>
-              <p>2,800+ Verified Studio Auditions</p>
+              <p>Express global &amp; local dispatch</p>
             </div>
             <div className="hero-stat-item">
               <div className="stat-value-row">
-                <Cpu size={13} color="#f5ba42" />
-                <h4>Grade-5 Titanium</h4>
+                <RotateCcw size={14} color="#f5ba42" />
+                <h4>30-Day Returns</h4>
               </div>
-              <p>6063 Solid Milled Chassis</p>
+              <p>Simple and hassle-free returns</p>
             </div>
             <div className="hero-stat-item">
               <div className="stat-value-row">
-                <ShieldCheck size={13} color="#10e793" />
-                <h4>2-Year Care</h4>
+                <ShieldCheck size={14} color="#10b981" />
+                <h4>2-Year Warranty</h4>
               </div>
-              <p>Zero-Defect Hardware Guarantee</p>
+              <p>Direct repair or replacement</p>
             </div>
           </div>
         </div>
 
-        {/* Hero Right Media Column */}
+        {/* Right Column: Clean Product Showcase */}
         <div className="hero-media-wrapper">
-          <div className="hero-media-backdrop"></div>
-
           <div className="hero-product-stage">
             <img
               key={activeProduct.id}
               src={activeProduct.image}
               alt={activeProduct.name}
-              className="hero-product-img spotlight-animate"
+              className="hero-product-img"
             />
           </div>
 
-          {/* Floating Hardware Telemetry Hologram */}
+          {/* Simple Product Info Card */}
           <div className="hero-floating-card">
             <div className="floating-card-header">
               <span className="live-status-pill">
-                <span className="pulse-dot"></span>
-                In Stock ({activeProduct.stockCount || 8} units left)
+                In Stock ({activeProduct.stockCount} units available)
               </span>
               <div className="floating-rating">
-                <Star size={11} fill="#f5ba42" color="#f5ba42" />
+                <Star size={12} fill="#f5ba42" color="#f5ba42" />
                 <span>{activeProduct.rating}</span>
               </div>
             </div>
@@ -158,7 +147,7 @@ export default function HeroBanner({ onExplore, onQuickView, featuredProduct, cu
                 className="btn-inspect-pill"
                 onClick={() => onQuickView(activeProduct)}
               >
-                <span>Full Specs</span>
+                <span>Quick View</span>
                 <ArrowRight size={12} />
               </button>
             </div>

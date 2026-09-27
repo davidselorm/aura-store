@@ -22,7 +22,7 @@ export default function FilterBar({
   return (
     <section className="filters-section" id="catalog-section">
       <div className="filters-bar">
-        {/* Category Channels with Tactile Glow */}
+        {/* Category Pills */}
         <div className="categories-pills">
           {CATEGORIES.map((cat) => (
             <button
@@ -38,7 +38,7 @@ export default function FilterBar({
           ))}
         </div>
 
-        {/* Filter & Sort Hardware Dials */}
+        {/* Filter & Sort Controls */}
         <div className="filter-tools">
           <label className={`instock-switch ${inStockOnly ? 'active' : ''}`}>
             <input
@@ -50,7 +50,7 @@ export default function FilterBar({
             <span className="switch-track">
               <span className="switch-thumb"></span>
             </span>
-            <span className="switch-label">Ready to Dispatch</span>
+            <span className="switch-label">In stock only</span>
           </label>
 
           <div className="sort-select-wrap">
@@ -61,10 +61,10 @@ export default function FilterBar({
               value={sortBy}
               onChange={(e) => setSortBy(e.target.value)}
             >
-              <option value="featured">Featured First</option>
+              <option value="featured">Featured</option>
               <option value="price-asc">Price: Low to High</option>
               <option value="price-desc">Price: High to Low</option>
-              <option value="rating">Top Verified Rating</option>
+              <option value="rating">Highest Rated</option>
             </select>
           </div>
         </div>
