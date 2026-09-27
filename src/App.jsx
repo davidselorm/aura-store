@@ -7,6 +7,7 @@ import ProductModal from './components/ProductModal';
 import CartDrawer from './components/CartDrawer';
 import WishlistDrawer from './components/WishlistDrawer';
 import CheckoutModal from './components/CheckoutModal';
+import OrdersDrawer from './components/OrdersDrawer';
 import Toast from './components/Toast';
 import Footer from './components/Footer';
 import { PRODUCTS, CURRENCIES } from './data/products';
@@ -59,6 +60,70 @@ export default function App() {
     }
   });
 
+  // Orders State with localStorage persistence
+  const [orders, setOrders] = useState(() => {
+    try {
+      const saved = localStorage.getItem('aura_orders');
+      if (saved) return JSON.parse(saved);
+      // Realistic starter order so user can immediately test telemetry & receipt
+      return [
+        {
+          id: 'AUR-692104',
+          createdAt: new Date(Date.now() - 36 * 60 * 60 * 1000).toISOString(),
+          status: 'In Transit',
+          items: [
+            {
+              id: PRODUCTS[0].id,
+              name: PRODUCTS[0].name,
+              price: PRODUCTS[0].price,
+              image: PRODUCTS[0].image,
+              selectedColor: PRODUCTS[0].colors[0],
+              quantity: 1,
+            },
+            {
+              id: PRODUCTS[3].id,
+              name: PRODUCTS[3].name,
+              price: PRODUCTS[3].price,
+              image: PRODUCTS[3].image,
+              selectedColor: PRODUCTS[3].colors[0],
+              quantity: 1,
+            },
+          ],
+          currency: CURRENCIES.USD,
+          subtotal: 348,
+          discount: 30,
+          appliedPromo: { code: 'SAVE30', description: '$30 off orders above $100' },
+          shipping: 0,
+          tax: 16,
+          total: 334,
+          shippingInfo: {
+            fullName: 'David Selorm',
+            email: 'davidselormwalker@gmail.com',
+            address: '14 Independence Avenue',
+            city: 'Accra',
+            country: 'Ghana',
+            postalCode: 'GA-102',
+          },
+          paymentMethod: 'momo',
+          trackingNumber: 'DHL-GH-829104',
+          estimatedDelivery: 'Tomorrow, by 4:00 PM',
+        },
+      ];
+    } catch {
+      return [];
+    }
+  });
+
+  const [quickViewProduct, setQuickViewProduct] = useState(null);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isWishlistOpen, setIsWishlistOpen] = useState(false);
+  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
+  const [isOrdersOpen, setIsOrdersOpen] = useState(false);
+  const [selectedOrderId, setSelectedOrderId] = useState(null);
+  const [appliedPromo, setAppliedPromo] = useState(null);
+  const [toasts, setToasts] = useState([]);
+
+  // LocalStorage synchronizers
   useEffect(() => {
     try {
       localStorage.setItem('aura_cart', JSON.stringify(cart));
@@ -74,12 +139,14 @@ export default function App() {
       console.error('Failed to sync wishlist to localStorage', e);
     }
   }, [wishlist]);
-  const [quickViewProduct, setQuickViewProduct] = useState(null);
-  const [isCartOpen, setIsCartOpen] = useState(false);
-  const [isWishlistOpen, setIsWishlistOpen] = useState(false);
-  const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
-  const [appliedPromo, setAppliedPromo] = useState(null);
-  const [toasts, setToasts] = useState([]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('aura_orders', JSON.stringify(orders));
+    } catch (e) {
+      console.error('Failed to sync orders to localStorage', e);
+    }
+  }, [orders]);
 
   // Toast Helper
   const showToast = (message) => {
@@ -115,8 +182,8 @@ export default function App() {
             price: product.price,
             image: product.image,
             selectedColor,
-            quantity: qty
-          }
+            quantity: qty,
+          },
         ];
       }
     });
@@ -164,18 +231,89 @@ export default function App() {
     setWishlist((prev) => prev.filter((item) => item.id !== productId));
   };
 
+  // Orders Operations
+  const handleOpenOrders = (orderId = null) => {
+    setSelectedOrderId(orderId);
+    setIsOrdersOpen(true);
+  };
+
+  const handleOrderCompleted = (newOrder) => {
+    if (newOrder) {
+      setOrders((prev) => [newOrder, ...prev]);
+    }
+    setCart([]);
+    setAppliedPromo(null);
+    showToast(`Order confirmed! Receipt dispatched to your email.`);
+  };
+
+  const handleReorder = (items) => {
+    if (!items || items.length === 0) return;
+    setCart((prevCart) => {
+      const nextCart = [...prevCart];
+      items.forEach((newItem) => {
+        const idx = nextCart.findIndex(
+          (c) => c.id === newItem.id && c.selectedColor?.name === newItem.selectedColor?.name
+        );
+        if (idx > -1) {
+          nextCart[idx].quantity += newItem.quantity || 1;
+        } else {
+          nextCart.push({ ...newItem });
+        }
+      });
+      return nextCart;
+    });
+    setIsCartOpen(true);
+  };
+
+  const handleLoadDemoOrder = () => {
+    const demo = {
+      id: `AUR-${Math.floor(100000 + Math.random() * 900000)}`,
+      createdAt: new Date().toISOString(),
+      status: 'In Transit',
+      items: [
+        {
+          id: PRODUCTS[1].id,
+          name: PRODUCTS[1].name,
+          price: PRODUCTS[1].price,
+          image: PRODUCTS[1].image,
+          selectedColor: PRODUCTS[1].colors[0],
+          quantity: 1,
+        },
+      ],
+      currency,
+      subtotal: Math.round(PRODUCTS[1].price * currency.rate),
+      discount: 0,
+      appliedPromo: null,
+      shipping: 0,
+      tax: Math.round(PRODUCTS[1].price * 0.05 * currency.rate),
+      total: Math.round(PRODUCTS[1].price * 1.05 * currency.rate),
+      shippingInfo: {
+        fullName: 'David Selorm',
+        email: 'davidselormwalker@gmail.com',
+        address: '14 Independence Avenue',
+        city: 'Accra',
+        country: 'Ghana',
+        postalCode: 'GA-102',
+      },
+      paymentMethod: 'card',
+      trackingNumber: `DHL-GH-${Math.floor(1000000 + Math.random() * 9000000)}`,
+      estimatedDelivery: 'Wednesday, Sep 30',
+    };
+    setOrders((prev) => [demo, ...prev]);
+    setSelectedOrderId(demo.id);
+    setIsOrdersOpen(true);
+    showToast('Sample order loaded into telemetry!');
+  };
+
   // Filter & Search Logic
   const filteredProducts = useMemo(() => {
     return PRODUCTS.filter((item) => {
-      // Category filter
       if (selectedCategory !== 'All Products' && item.category !== selectedCategory) {
         return false;
       }
-      // In stock filter
       if (inStockOnly && !item.inStock) {
         return false;
       }
-      // Search Query
       if (searchQuery.trim()) {
         const q = searchQuery.toLowerCase();
         const matchesName = item.name.toLowerCase().includes(q);
@@ -209,11 +347,6 @@ export default function App() {
     setIsCheckoutOpen(true);
   };
 
-  const handleOrderCompleted = () => {
-    setCart([]);
-    showToast('Payment successful! Your order has been placed.');
-  };
-
   return (
     <div className="app-container" id="top">
       {/* Top Notification Announcement */}
@@ -232,8 +365,10 @@ export default function App() {
         setSearchQuery={setSearchQuery}
         cartCount={totalCartCount}
         wishlistCount={wishlist.length}
+        ordersCount={orders.length}
         onOpenCart={() => setIsCartOpen(true)}
         onOpenWishlist={() => setIsWishlistOpen(true)}
+        onOpenOrders={() => handleOpenOrders(null)}
       />
 
       {/* Hero Showcase */}
@@ -304,7 +439,10 @@ export default function App() {
       </main>
 
       {/* Footer */}
-      <Footer onShowToast={showToast} />
+      <Footer
+        onShowToast={showToast}
+        onOpenOrders={() => handleOpenOrders(null)}
+      />
 
       {/* Quick View Product Modal */}
       <ProductModal
@@ -352,6 +490,19 @@ export default function App() {
         currency={currency}
         appliedPromo={appliedPromo}
         onOrderCompleted={handleOrderCompleted}
+        onOpenOrders={(orderId) => handleOpenOrders(orderId)}
+      />
+
+      {/* Orders & Digital Receipt Drawer */}
+      <OrdersDrawer
+        isOpen={isOrdersOpen}
+        onClose={() => setIsOrdersOpen(false)}
+        orders={orders}
+        selectedOrderId={selectedOrderId}
+        onSelectOrder={(id) => setSelectedOrderId(id)}
+        onReorder={handleReorder}
+        onLoadDemoOrder={handleLoadDemoOrder}
+        onShowToast={showToast}
       />
 
       {/* Toast Feedback */}
