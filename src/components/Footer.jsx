@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Sparkles, ShieldCheck, Truck, RotateCcw, CreditCard, ArrowRight, Check } from 'lucide-react';
 
-export default function Footer({ onShowToast }) {
+export default function Footer({ onShowToast, onOpenOrders }) {
   const [email, setEmail] = useState('');
   const [subscribed, setSubscribed] = useState(false);
 
@@ -90,7 +90,25 @@ export default function Footer({ onShowToast }) {
         <div className="footer-col">
           <h5>Support &amp; Care</h5>
           <ul className="footer-links">
-            <li><a href="#top">Order Telemetry</a></li>
+            <li>
+              <button
+                onClick={(e) => {
+                  e.preventDefault();
+                  if (onOpenOrders) onOpenOrders();
+                }}
+                style={{
+                  background: 'none',
+                  border: 'none',
+                  color: 'inherit',
+                  font: 'inherit',
+                  cursor: 'pointer',
+                  padding: 0,
+                  textAlign: 'left',
+                }}
+              >
+                Order Telemetry &amp; Receipts
+              </button>
+            </li>
             <li><a href="#top">Firmware &amp; VIA Maps</a></li>
             <li><a href="#top">Warranty Claims</a></li>
             <li><a href="#top">Ghana MoMo Support</a></li>

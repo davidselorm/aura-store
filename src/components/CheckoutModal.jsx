@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { X, CreditCard, Smartphone, CheckCircle2, Lock, Sparkles, ArrowRight } from 'lucide-react';
+import { X, CreditCard, Smartphone, CheckCircle2, Lock, Sparkles, ArrowRight, FileText } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 export default function CheckoutModal({
@@ -9,6 +9,7 @@ export default function CheckoutModal({
   currency,
   appliedPromo,
   onOrderCompleted,
+  onOpenOrders,
 }) {
   const [step, setStep] = useState('shipping'); // 'shipping' | 'payment' | 'success'
   const [paymentMethod, setPaymentMethod] = useState('card'); // 'card' | 'momo' | 'applepay'
@@ -77,6 +78,29 @@ export default function CheckoutModal({
   const handleCompleteOrder = (e) => {
     e.preventDefault();
     const generatedId = `AUR-${Math.floor(100000 + Math.random() * 900000)}`;
+    const trackingCode = `DHL-GH-${Math.floor(1000000 + Math.random() * 9000000)}`;
+    const newOrder = {
+      id: generatedId,
+      createdAt: new Date().toISOString(),
+      status: 'Confirmed',
+      items: [...cart],
+      currency: { ...currency },
+      subtotal,
+      discount,
+      appliedPromo: appliedPromo ? { ...appliedPromo } : null,
+      shipping,
+      tax,
+      total,
+      shippingInfo: { ...formData },
+      paymentMethod,
+      trackingNumber: trackingCode,
+      estimatedDelivery: new Date(Date.now() + 3 * 24 * 60 * 60 * 1000).toLocaleDateString(undefined, {
+        weekday: 'short',
+        month: 'short',
+        day: 'numeric',
+      }),
+    };
+
     setOrderId(generatedId);
     setStep('success');
 
@@ -92,7 +116,7 @@ export default function CheckoutModal({
       console.log('Confetti effect:', err);
     }
 
-    onOrderCompleted();
+    onOrderCompleted(newOrder);
   };
 
   return (
@@ -398,14 +422,28 @@ export default function CheckoutModal({
               <strong style={{ color: '#fff' }}>{formData.email}</strong>.
             </p>
 
-            <button
-              id="success-done-btn"
-              className="btn-hero-primary"
-              style={{ margin: '0 auto', padding: '12px 32px' }}
-              onClick={onClose}
-            >
-              <span>Back to Storefront</span>
-            </button>
+            <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
+              <button
+                id="success-view-receipt-btn"
+                className="btn-hero-secondary"
+                style={{ padding: '12px 24px' }}
+                onClick={() => {
+                  onClose();
+                  if (onOpenOrders) onOpenOrders(orderId);
+                }}
+              >
+                <FileText size={16} />
+                <span>View Digital Receipt</span>
+              </button>
+              <button
+                id="success-done-btn"
+                className="btn-hero-primary"
+                style={{ padding: '12px 28px' }}
+                onClick={onClose}
+              >
+                <span>Continue Shopping</span>
+              </button>
+            </div>
           </div>
         )}
       </div>

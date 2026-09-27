@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShoppingBag, Heart, Search, X, Sparkles } from 'lucide-react';
+import { ShoppingBag, Heart, Search, X, Sparkles, Package } from 'lucide-react';
 import { CURRENCIES } from '../data/products';
 
 export default function Navbar({
@@ -9,8 +9,10 @@ export default function Navbar({
   setSearchQuery,
   cartCount,
   wishlistCount,
+  ordersCount,
   onOpenCart,
   onOpenWishlist,
+  onOpenOrders,
 }) {
   return (
     <header className="navbar">
@@ -65,6 +67,21 @@ export default function Navbar({
               </option>
             ))}
           </select>
+
+          {/* Orders / Telemetry Button */}
+          <button
+            id="nav-orders-btn"
+            className="nav-icon-btn"
+            onClick={onOpenOrders}
+            title="Orders & Receipts Telemetry"
+          >
+            <Package size={19} />
+            {ordersCount > 0 && (
+              <span className="badge-counter" style={{ background: '#0284c7' }}>
+                {ordersCount}
+              </span>
+            )}
+          </button>
 
           {/* Wishlist Button */}
           <button
