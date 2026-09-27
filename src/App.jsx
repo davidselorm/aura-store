@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Navbar from './components/Navbar';
 import HeroBanner from './components/HeroBanner';
 import FilterBar from './components/FilterBar';
@@ -10,7 +10,7 @@ import CheckoutModal from './components/CheckoutModal';
 import Toast from './components/Toast';
 import Footer from './components/Footer';
 import { PRODUCTS, CURRENCIES } from './data/products';
-import { Sparkles, PackageSearch } from 'lucide-react';
+import { PackageSearch } from 'lucide-react';
 
 export default function App() {
   // Global & Preferences state
@@ -20,19 +20,60 @@ export default function App() {
   const [sortBy, setSortBy] = useState('featured');
   const [inStockOnly, setInStockOnly] = useState(false);
 
-  // E-commerce state
-  const [cart, setCart] = useState([
-    // Starter cart item for great first impression
-    {
-      id: PRODUCTS[0].id,
-      name: PRODUCTS[0].name,
-      price: PRODUCTS[0].price,
-      image: PRODUCTS[0].image,
-      selectedColor: PRODUCTS[0].colors[0],
-      quantity: 1
+  // E-commerce state with localStorage persistence
+  const [cart, setCart] = useState(() => {
+    try {
+      const saved = localStorage.getItem('aura_cart');
+      return saved
+        ? JSON.parse(saved)
+        : [
+            {
+              id: PRODUCTS[0].id,
+              name: PRODUCTS[0].name,
+              price: PRODUCTS[0].price,
+              image: PRODUCTS[0].image,
+              selectedColor: PRODUCTS[0].colors[0],
+              quantity: 1,
+            },
+          ];
+    } catch {
+      return [
+        {
+          id: PRODUCTS[0].id,
+          name: PRODUCTS[0].name,
+          price: PRODUCTS[0].price,
+          image: PRODUCTS[0].image,
+          selectedColor: PRODUCTS[0].colors[0],
+          quantity: 1,
+        },
+      ];
     }
-  ]);
-  const [wishlist, setWishlist] = useState([PRODUCTS[1]]);
+  });
+
+  const [wishlist, setWishlist] = useState(() => {
+    try {
+      const saved = localStorage.getItem('aura_wishlist');
+      return saved ? JSON.parse(saved) : [PRODUCTS[1]];
+    } catch {
+      return [PRODUCTS[1]];
+    }
+  });
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('aura_cart', JSON.stringify(cart));
+    } catch (e) {
+      console.error('Failed to sync cart to localStorage', e);
+    }
+  }, [cart]);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('aura_wishlist', JSON.stringify(wishlist));
+    } catch (e) {
+      console.error('Failed to sync wishlist to localStorage', e);
+    }
+  }, [wishlist]);
   const [quickViewProduct, setQuickViewProduct] = useState(null);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isWishlistOpen, setIsWishlistOpen] = useState(false);
@@ -267,6 +308,7 @@ export default function App() {
 
       {/* Quick View Product Modal */}
       <ProductModal
+        key={quickViewProduct?.id || 'empty-modal'}
         product={quickViewProduct}
         currency={currency}
         isOpen={Boolean(quickViewProduct)}

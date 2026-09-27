@@ -1,6 +1,5 @@
 import React from 'react';
 import { CATEGORIES } from '../data/products';
-import { SlidersHorizontal } from 'lucide-react';
 
 export default function FilterBar({
   selectedCategory,

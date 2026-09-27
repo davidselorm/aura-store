@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { X, Trash2, ShoppingBag, ArrowRight, Tag, Check, Sparkles } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { X, Trash2, ShoppingBag, ArrowRight, Check } from 'lucide-react';
 import { PROMO_CODES } from '../data/products';
 
 export default function CartDrawer({
@@ -14,10 +14,21 @@ export default function CartDrawer({
   setAppliedPromo,
   onShowToast,
 }) {
-  if (!isOpen) return null;
-
   const [promoInput, setPromoInput] = useState('');
   const [promoError, setPromoError] = useState('');
+
+  // Handle Escape key to close drawer
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
+  // Hook rules require all hooks to run before early returns
+  if (!isOpen) return null;
 
   // Calculations
   const FREE_SHIPPING_THRESHOLD_USD = 150;

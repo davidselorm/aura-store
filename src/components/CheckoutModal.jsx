@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { X, CreditCard, Smartphone, CheckCircle2, ShieldCheck, Lock, Truck, Sparkles, ArrowRight } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { X, CreditCard, Smartphone, CheckCircle2, Lock, Sparkles, ArrowRight } from 'lucide-react';
 import confetti from 'canvas-confetti';
 
 export default function CheckoutModal({
@@ -10,8 +10,6 @@ export default function CheckoutModal({
   appliedPromo,
   onOrderCompleted,
 }) {
-  if (!isOpen) return null;
-
   const [step, setStep] = useState('shipping'); // 'shipping' | 'payment' | 'success'
   const [paymentMethod, setPaymentMethod] = useState('card'); // 'card' | 'momo' | 'applepay'
   const [orderId, setOrderId] = useState('');
@@ -30,6 +28,19 @@ export default function CheckoutModal({
     momoNetwork: 'MTN MoMo',
     momoPhone: '024 123 4567',
   });
+
+  // Handle Escape key to close modal
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
+  // Hook rules require all hooks to run before early returns
+  if (!isOpen) return null;
 
   // Calculate pricing
   const rawSubtotalUSD = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);

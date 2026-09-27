@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { X, Heart, Trash2, ShoppingBag } from 'lucide-react';
 
 export default function WishlistDrawer({
@@ -9,6 +9,16 @@ export default function WishlistDrawer({
   onRemoveFromWishlist,
   onMoveToCart,
 }) {
+  // Handle Escape key to close drawer
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   return (

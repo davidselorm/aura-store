@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { X, Star, ShoppingBag, Check, ShieldCheck, Zap, ArrowRight } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { X, Star, ShoppingBag, Check, ArrowRight } from 'lucide-react';
 
 export default function ProductModal({
   product,
@@ -9,11 +9,31 @@ export default function ProductModal({
   onAddToCart,
   onDirectCheckout,
 }) {
-  if (!isOpen || !product) return null;
-
-  const [selectedColor, setSelectedColor] = useState(product.colors?.[0] || null);
+  const [selectedColor, setSelectedColor] = useState(null);
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
+
+  // Sync selected color and reset quantity when product changes
+  useEffect(() => {
+    if (product) {
+      setSelectedColor(product.colors?.[0] || null);
+      setQuantity(1);
+      setAdded(false);
+    }
+  }, [product]);
+
+  // Handle Escape key to close modal
+  useEffect(() => {
+    if (!isOpen) return;
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape') onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
+  // Hook rules require all hooks to run before early returns
+  if (!isOpen || !product) return null;
 
   const price = Math.round(product.price * currency.rate);
   const originalPrice = Math.round(product.originalPrice * currency.rate);
