@@ -100,7 +100,7 @@ export default function OrdersDrawer({
               </button>
             )}
             <h3>
-              <Package size={20} color="#38bdf8" />
+              <Package size={20} color="#f5ba42" />
               <span>
                 {activeTab === 'receipt' && currentOrder
                   ? `Receipt #${currentOrder.id}`
@@ -119,7 +119,7 @@ export default function OrdersDrawer({
             <PackageSearch size={52} color="#64748b" style={{ margin: '0 auto 16px' }} />
             <h4>No Orders on Record</h4>
             <p style={{ fontSize: '0.85rem', color: '#94a3b8', maxWidth: '340px', margin: '0 auto 20px' }}>
-              When you purchase hardware from AURA Studio, your real-time courier telemetry and printable digital receipts will appear here.
+              When you purchase hardware from AURA Atelier, your real-time courier telemetry and printable digital receipts will appear here.
             </p>
             <div style={{ display: 'flex', gap: '10px', justifyContent: 'center' }}>
               <button className="btn-hero-primary" onClick={onClose}>
@@ -207,7 +207,7 @@ export default function OrdersDrawer({
                   <div style={{ fontSize: '0.72rem', textTransform: 'uppercase', letterSpacing: '0.05em', color: '#64748b', fontWeight: 700 }}>
                     Courier Waybill Number
                   </div>
-                  <div style={{ fontSize: '1rem', fontWeight: 700, color: '#38bdf8', letterSpacing: '0.04em', marginTop: '2px', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <div style={{ fontSize: '1rem', fontWeight: 700, color: '#f5ba42', letterSpacing: '0.04em', marginTop: '2px', display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <span>{currentOrder.trackingNumber || 'DHL-GH-8392104'}</span>
                     <button
                       className="copy-btn"
@@ -252,17 +252,17 @@ export default function OrdersDrawer({
                 <div style={{ display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 600, color: '#f8fafc', fontSize: '0.88rem' }}>
                   {currentOrder.paymentMethod === 'momo' ? (
                     <>
-                      <Smartphone size={15} color="#f59e0b" />
+                      <Smartphone size={15} color="#f5ba42" />
                       <span>{currentOrder.shippingInfo?.momoNetwork || 'MTN Mobile Money'}</span>
                     </>
                   ) : currentOrder.paymentMethod === 'applepay' ? (
                     <>
-                      <Sparkles size={15} color="#38bdf8" />
+                      <Sparkles size={15} color="#f5ba42" />
                       <span>Apple Pay / Instant</span>
                     </>
                   ) : (
                     <>
-                      <CreditCard size={15} color="#38bdf8" />
+                      <CreditCard size={15} color="#f5ba42" />
                       <span>Card ending in 8892</span>
                     </>
                   )}
