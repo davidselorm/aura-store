@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, Star, ShieldCheck, Zap, Truck } from 'lucide-react';
+import { ArrowRight, Star, Zap } from 'lucide-react';
 
 export default function HeroBanner({ onExplore, onQuickView, featuredProduct, currency }) {
   const convertedPrice = Math.round(featuredProduct.price * currency.rate);

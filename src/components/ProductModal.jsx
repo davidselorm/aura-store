@@ -9,18 +9,9 @@ export default function ProductModal({
   onAddToCart,
   onDirectCheckout,
 }) {
-  const [selectedColor, setSelectedColor] = useState(null);
+  const [selectedColor, setSelectedColor] = useState(product?.colors?.[0] || null);
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
-
-  // Sync selected color and reset quantity when product changes
-  useEffect(() => {
-    if (product) {
-      setSelectedColor(product.colors?.[0] || null);
-      setQuantity(1);
-      setAdded(false);
-    }
-  }, [product]);
 
   // Handle Escape key to close modal
   useEffect(() => {
