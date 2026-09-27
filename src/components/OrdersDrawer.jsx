@@ -82,8 +82,7 @@ export default function OrdersDrawer({
   return (
     <div className="drawer-backdrop" onClick={onClose}>
       <div
-        className="drawer-panel"
-        style={{ maxWidth: '580px' }}
+        className="drawer-panel orders-drawer-panel"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
