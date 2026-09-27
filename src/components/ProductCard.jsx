@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Star, Heart, Eye, ShoppingBag, Check } from 'lucide-react';
+import { Star, Heart, Eye, ShoppingBag, Check, Zap } from 'lucide-react';
 
 export default function ProductCard({
   product,
@@ -9,6 +9,7 @@ export default function ProductCard({
   onQuickView,
   onAddToCart,
 }) {
+  const [selectedColor, setSelectedColor] = useState(product.colors?.[0] || null);
   const [justAdded, setJustAdded] = useState(false);
 
   const price = Math.round(product.price * currency.rate);
@@ -16,16 +17,25 @@ export default function ProductCard({
 
   const handleAdd = (e) => {
     e.stopPropagation();
-    onAddToCart(product);
+    onAddToCart(product, 1, selectedColor);
     setJustAdded(true);
     setTimeout(() => setJustAdded(false), 1200);
   };
+
+  // Get primary spec highlight if available
+  const topSpecKey = product.specs ? Object.keys(product.specs)[0] : null;
+  const topSpecVal = topSpecKey ? product.specs[topSpecKey] : null;
 
   return (
     <article className="product-card" id={`product-card-${product.id}`}>
       {/* Top Image Box */}
       <div className="card-image-box" onClick={() => onQuickView(product)}>
-        {product.badge && <span className="card-badge">{product.badge}</span>}
+        {product.badge && (
+          <span className="card-badge">
+            <Zap size={11} className="badge-zap" />
+            <span>{product.badge}</span>
+          </span>
+        )}
 
         <button
           id={`wishlist-btn-${product.id}`}
@@ -36,7 +46,7 @@ export default function ProductCard({
           }}
           title={isWishlisted ? 'Remove from wishlist' : 'Save to wishlist'}
         >
-          <Heart size={16} fill={isWishlisted ? '#f43f5e' : 'none'} />
+          <Heart size={16} fill={isWishlisted ? '#f43f5e' : 'none'} color={isWishlisted ? '#f43f5e' : '#94a3b8'} />
         </button>
 
         <img
@@ -57,7 +67,7 @@ export default function ProductCard({
             }}
           >
             <Eye size={15} />
-            <span>Quick Specs &amp; Details</span>
+            <span>Inspect Hardware &amp; Specs</span>
           </button>
         </div>
       </div>
@@ -67,17 +77,44 @@ export default function ProductCard({
         <div className="card-meta-row">
           <span className="card-category">{product.category}</span>
           <div className="card-rating">
-            <Star size={13} fill="#f59e0b" />
+            <Star size={13} fill="#f59e0b" color="#f59e0b" />
             <span>{product.rating}</span>
             <span className="card-reviews-count">({product.reviewsCount})</span>
           </div>
         </div>
 
-        <h3 className="card-title" onClick={() => onQuickView(product)} style={{ cursor: 'pointer' }}>
+        <h3
+          className="card-title"
+          onClick={() => onQuickView(product)}
+          style={{ cursor: 'pointer' }}
+        >
           {product.name}
         </h3>
 
         <p className="card-tagline">{product.tagline}</p>
+
+        {/* Color swatches & Key Spec Tag */}
+        <div className="card-swatches-spec-row">
+          {product.colors && product.colors.length > 0 && (
+            <div className="card-color-swatches" onClick={(e) => e.stopPropagation()}>
+              {product.colors.map((color) => (
+                <button
+                  key={color.name}
+                  className={`card-color-dot ${selectedColor?.name === color.name ? 'active' : ''}`}
+                  style={{ backgroundColor: color.hex }}
+                  onClick={() => setSelectedColor(color)}
+                  title={color.name}
+                />
+              ))}
+            </div>
+          )}
+
+          {topSpecVal && (
+            <span className="card-spec-pill" title={`${topSpecKey}: ${topSpecVal}`}>
+              {topSpecVal}
+            </span>
+          )}
+        </div>
 
         {/* Card Footer with Price and Add to Bag */}
         <div className="card-footer">
@@ -100,12 +137,12 @@ export default function ProductCard({
           >
             {justAdded ? (
               <>
-                <Check size={16} />
+                <Check size={15} />
                 <span>Added!</span>
               </>
             ) : (
               <>
-                <ShoppingBag size={15} />
+                <ShoppingBag size={14} />
                 <span>Add</span>
               </>
             )}
