@@ -79,7 +79,7 @@ export default function CartDrawer({
         {/* Header */}
         <div className="drawer-header">
           <h3>
-            <ShoppingBag size={20} color="#38bdf8" />
+            <ShoppingBag size={20} color="#f5ba42" />
             <span>Shopping Bag ({cart.reduce((s, i) => s + i.quantity, 0)})</span>
           </h3>
           <button id="cart-drawer-close-btn" className="drawer-close-btn" onClick={onClose}>
