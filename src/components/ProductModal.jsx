@@ -115,9 +115,9 @@ export default function ProductModal({
           {product.specs && (
             <div style={{ marginBottom: '24px' }}>
               <div className="modal-section-label">Technical Specifications</div>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px', fontSize: '0.8rem', background: 'rgba(255,255,255,0.03)', padding: '12px', borderRadius: '8px', border: '1px solid rgba(255,255,255,0.06)' }}>
+              <div className="modal-specs-box">
                 {Object.entries(product.specs).map(([key, val]) => (
-                  <div key={key}>
+                  <div key={key} className="modal-spec-entry">
                     <span style={{ color: '#94a3b8' }}>{key}: </span>
                     <strong style={{ color: '#f8fafc' }}>{val}</strong>
                   </div>
