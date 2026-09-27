@@ -321,6 +321,7 @@ a {
 }
 
 .cart-btn-primary {
+  position: relative;
   display: flex;
   align-items: center;
   gap: 8px;
@@ -336,6 +337,24 @@ a {
 .cart-btn-primary:hover {
   transform: translateY(-2px);
   box-shadow: 0 0 25px rgba(56, 189, 248, 0.45);
+}
+
+.cart-btn-primary .badge-counter {
+  position: static;
+  background: rgba(255, 255, 255, 0.22);
+  color: #fff;
+  font-size: 0.74rem;
+  font-weight: 800;
+  min-width: 20px;
+  height: 20px;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6px;
+  box-shadow: none;
+  margin-left: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
 }
 
 /* ---------------------------------------------------------

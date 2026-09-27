@@ -104,7 +104,9 @@ export default function Navbar({
           >
             <ShoppingBag size={18} />
             <span>Bag</span>
-            <span className="badge-counter">{cartCount}</span>
+            {cartCount > 0 && (
+              <span className="badge-counter">{cartCount}</span>
+            )}
           </button>
         </div>
       </div>
