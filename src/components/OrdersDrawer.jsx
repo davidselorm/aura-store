@@ -464,7 +464,7 @@ export default function OrdersDrawer({
                         <div style={{ fontSize: '0.75rem', color: '#94a3b8' }}>
                           {totalUnits} {totalUnits === 1 ? 'item' : 'items'}
                         </div>
-                        <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#38bdf8' }}>
+                        <div style={{ fontSize: '1.05rem', fontWeight: 800, color: '#f5ba42' }}>
                           {order.currency?.symbol || '$'}{order.total}
                         </div>
                       </div>
@@ -474,7 +474,7 @@ export default function OrdersDrawer({
                       <span style={{ fontSize: '0.76rem', color: '#64748b' }}>
                         Tracking: {order.trackingNumber || 'DHL Express'}
                       </span>
-                      <span style={{ fontSize: '0.8rem', color: '#38bdf8', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
+                      <span style={{ fontSize: '0.8rem', color: '#f5ba42', fontWeight: 600, display: 'flex', alignItems: 'center', gap: '4px' }}>
                         <span>View Receipt &amp; Status</span>
                         <span>→</span>
                       </span>

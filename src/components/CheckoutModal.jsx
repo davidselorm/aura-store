@@ -245,7 +245,7 @@ export default function CheckoutModal({
               <button
                 type="button"
                 onClick={() => setStep('shipping')}
-                style={{ color: '#38bdf8', fontSize: '0.82rem' }}
+                style={{ color: '#f5ba42', fontSize: '0.82rem' }}
               >
                 ← Edit Address
               </button>
@@ -374,7 +374,7 @@ export default function CheckoutModal({
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '1.1rem', fontWeight: 800, color: '#fff' }}>
                 <span>Final Amount Charged</span>
-                <span style={{ color: '#38bdf8' }}>{currency.symbol}{total}</span>
+                <span style={{ color: '#f5ba42' }}>{currency.symbol}{total}</span>
               </div>
             </div>
 
@@ -408,8 +408,8 @@ export default function CheckoutModal({
               Thank you, <strong>{formData.fullName}</strong>. Your payment was authorized.
             </p>
 
-            <div style={{ background: 'rgba(56, 189, 248, 0.08)', border: '1px solid rgba(56, 189, 248, 0.25)', padding: '16px', borderRadius: '12px', maxWidth: '380px', margin: '0 auto 24px' }}>
-              <div style={{ fontSize: '0.75rem', color: '#7dd3fc', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 700 }}>
+            <div style={{ background: 'rgba(245, 186, 66, 0.12)', border: '1px solid rgba(245, 186, 66, 0.35)', padding: '16px', borderRadius: '12px', maxWidth: '380px', margin: '0 auto 24px' }}>
+              <div style={{ fontSize: '0.75rem', color: '#f5ba42', textTransform: 'uppercase', letterSpacing: '0.06em', fontWeight: 700 }}>
                 Order Reference Code
               </div>
               <div style={{ fontSize: '1.4rem', fontWeight: 800, color: '#fff', letterSpacing: '0.05em', marginTop: '4px' }}>
