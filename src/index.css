@@ -78,13 +78,8 @@ html {
 
 body {
   min-height: 100%;
-  background-color: var(--bg-deep);
-  background-image: 
-    radial-gradient(ellipse at 50% -5%, rgba(245, 186, 66, 0.08) 0%, transparent 60%),
-    radial-gradient(ellipse at 88% 22%, rgba(16, 231, 147, 0.035) 0%, transparent 50%),
-    radial-gradient(ellipse at 12% 55%, rgba(255, 159, 28, 0.03) 0%, transparent 45%),
-    linear-gradient(180deg, #040508 0%, #06080e 100%);
-  background-attachment: fixed;
+  background-color: #0b0d13;
+  background-image: linear-gradient(180deg, #0b0d13 0%, #0e111a 100%);
   color: var(--text-primary);
   font-family: var(--font-body);
   font-size: 15px;
@@ -151,8 +146,8 @@ img {
    Top Announcement Bar (Gold Sheen)
    --------------------------------------------------------- */
 .announcement-bar {
-  background: linear-gradient(90deg, #05070c 0%, #0d121c 50%, #05070c 100%);
-  border-bottom: 1px solid rgba(245, 186, 66, 0.18);
+  background: #0d1017;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   color: var(--text-secondary);
   font-size: 0.78rem;
   padding: 8px 20px;
@@ -166,16 +161,16 @@ img {
 }
 
 .announcement-badge {
-  background: rgba(245, 186, 66, 0.14);
-  color: var(--accent-gold);
-  font-weight: 800;
+  background: rgba(255, 255, 255, 0.08);
+  color: #f8fafc;
+  font-weight: 600;
   font-size: 0.68rem;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.05em;
   padding: 2px 9px;
   border-radius: var(--radius-full);
-  border: 1px solid rgba(245, 186, 66, 0.35);
-  box-shadow: 0 0 10px rgba(245, 186, 66, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: none;
   white-space: nowrap;
 }
 
@@ -221,16 +216,14 @@ img {
   justify-content: center;
   overflow: hidden;
   position: relative;
-  border: 1px solid rgba(245, 186, 66, 0.45);
-  box-shadow: 0 0 18px rgba(245, 186, 66, 0.25), inset 0 0 10px rgba(245, 186, 66, 0.15);
-  transition: transform var(--transition-spring), border-color var(--transition-smooth);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: none;
+  transition: opacity var(--transition-fast);
   flex-shrink: 0;
-  background: #06080e;
+  background: #090b10;
 }
 .brand-logo:hover .brand-emblem-wrapper {
-  transform: scale(1.05) rotate(2deg);
-  border-color: rgba(245, 186, 66, 0.8);
-  box-shadow: 0 0 25px rgba(245, 186, 66, 0.4);
+  opacity: 0.85;
 }
 
 .brand-emblem-img {
@@ -252,34 +245,31 @@ img {
 
 .brand-name-title {
   font-family: var(--font-heading);
-  font-size: 1.35rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  background: linear-gradient(135deg, #ffffff 30%, #f5ba42 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #ffffff;
 }
 
 .brand-edition-badge {
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  background: rgba(245, 186, 66, 0.12);
-  color: var(--accent-gold);
-  padding: 1px 7px;
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  background: rgba(255, 255, 255, 0.08);
+  color: #cbd5e1;
+  padding: 1px 6px;
   border-radius: 4px;
-  border: 1px solid rgba(245, 186, 66, 0.32);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .brand-subtext {
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.2em;
-  color: var(--text-muted);
-  font-weight: 700;
-  margin-top: -2px;
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  color: #64748b;
+  font-weight: 600;
+  margin-top: 1px;
 }
 
 /* Global Search Bar */
@@ -300,9 +290,9 @@ img {
   transition: all var(--transition-smooth);
 }
 .search-input-box:focus-within {
-  background: rgba(17, 23, 36, 0.95);
-  border-color: rgba(245, 186, 66, 0.55);
-  box-shadow: 0 0 20px rgba(245, 186, 66, 0.2);
+  background: rgba(20, 25, 38, 0.95);
+  border-color: rgba(255, 255, 255, 0.25);
+  box-shadow: none;
 }
 
 .search-input {
@@ -406,57 +396,56 @@ img {
   position: absolute;
   top: -4px;
   right: -4px;
-  background: linear-gradient(135deg, #f5ba42, #ff9f1c);
-  color: #040508;
+  background: #f5ba42;
+  color: #090a0f;
   font-size: 0.65rem;
-  font-weight: 800;
+  font-weight: 700;
   min-width: 18px;
   height: 18px;
   border-radius: 99px;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 0 10px rgba(245, 186, 66, 0.6);
+  box-shadow: none;
   padding: 0 4px;
 }
 .badge-counter.green {
-  background: var(--accent-emerald);
-  color: #040508;
-  box-shadow: 0 0 10px rgba(16, 231, 147, 0.6);
+  background: #10b981;
+  color: #ffffff;
+  box-shadow: none;
 }
 .badge-counter.amber {
-  background: linear-gradient(135deg, #f5ba42, #ff9f1c);
-  color: #040508;
+  background: #f5ba42;
+  color: #090a0f;
 }
 
-/* Primary Bag Capsule Button (Gold/Amber Atelier) */
+/* Primary Cart Capsule Button */
 .cart-btn-primary {
   position: relative;
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 7px 18px;
-  background: linear-gradient(135deg, #f5ba42 0%, #ff9f1c 100%);
-  color: #040508;
+  padding: 7px 16px;
+  background: #ffffff;
+  color: #090a0f;
   border-radius: var(--radius-full);
   font-size: 0.86rem;
-  font-weight: 800;
-  letter-spacing: 0.02em;
-  box-shadow: 0 4px 18px rgba(245, 186, 66, 0.35);
-  transition: all var(--transition-smooth);
+  font-weight: 600;
+  border: 1px solid #ffffff;
+  transition: all var(--transition-fast);
 }
 .cart-btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 26px rgba(245, 186, 66, 0.55);
-  filter: brightness(1.08);
+  background: #f1f5f9;
+  color: #000000;
+  transform: translateY(-1px);
 }
 
 .cart-btn-primary .badge-counter {
   position: static;
-  background: #040508;
-  color: #f5ba42;
+  background: #090a0f;
+  color: #ffffff;
   font-size: 0.72rem;
-  font-weight: 800;
+  font-weight: 700;
   min-width: 20px;
   height: 20px;
   border-radius: var(--radius-full);
@@ -466,7 +455,7 @@ img {
   padding: 0 6px;
   box-shadow: none;
   margin-left: 2px;
-  border: 1px solid rgba(245, 186, 66, 0.4);
+  border: none;
 }
 
 /* ---------------------------------------------------------
